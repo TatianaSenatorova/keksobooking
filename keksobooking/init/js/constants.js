@@ -1,7 +1,7 @@
 const MAP_LEAFLET = L.map('map-canvas');
 const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const MAX_MAP_ZOOM = 19;
-const CURRENT_ZOOM = 10;
+const CURRENT_ZOOM = 15;
 const MAP_ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
 
@@ -13,7 +13,7 @@ const TokioCoordinates = {
 const DISABLE_CLASS_FORM = 'ad-form--disabled';
 const DISABLE_CLASS_FILTERS = 'map__filters--disabled';
 
-const BASE_URL = 'https://25.javascript.htmlacademy.pro/keksobooking123';
+const BASE_URL = 'https://25.javascript.htmlacademy.pro/keksobooking';
 
 const Route = {
   GET_DATA: '/data',

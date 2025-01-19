@@ -14,7 +14,6 @@ import {
 const disableForm = (form, fieldSets, disableClass, isDisable) => {
   if(isDisable) {
     form.classList.add(disableClass);
-    console.log(...form.classList);
   }
   form.classList.remove(disableClass);
   fieldSets.forEach((fildset) => {

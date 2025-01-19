@@ -7,6 +7,7 @@ import {
   ERROR_GET_MESSAGE,
   ErrorElementStyles
 } from './constants.js';
+import { renderMarkers} from './render-appartments.js';
 import './map.js';
 import './form-filters.js';
 
@@ -15,6 +16,7 @@ getMap();
 try {
   const appartments = await getData();
   saveData(appartments);
+  renderMarkers(appartments);
 } catch {
   addTagTimeout(ERROR_GET_MESSAGE, ErrorElementStyles);
 }
