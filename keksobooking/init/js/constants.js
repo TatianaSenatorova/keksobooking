@@ -1,13 +1,13 @@
 const MAP_LEAFLET = L.map('map-canvas');
 const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const MAX_MAP_ZOOM = 19;
-const CURRENT_ZOOM = 15;
+const CURRENT_ZOOM = 14;
 const MAP_ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
 
 const TokioCoordinates = {
-  LATITUDE: 35.42,
-  LONGITUDE: 139.25
+  LATITUDE: 35.681729,
+  LONGITUDE: 139.753927
 };
 
 const DISABLE_CLASS_FORM = 'ad-form--disabled';
@@ -42,6 +42,14 @@ const ErrorElementStyles = {
   color: 'white'
 };
 
+const SelectNameObjectKey = {
+  'housing-type': 'type',
+  'housing-price': 'price',
+  'housing-rooms': 'rooms',
+  'housing-guests': 'guests',
+  'features': 'features',
+};
+
 export {
   MAP_LEAFLET,
   TILE_LAYER,
@@ -56,5 +64,6 @@ export {
   Method,
   ERROR_GET_MESSAGE,
   ALERT_SHOW_TIME,
-  ErrorElementStyles
+  ErrorElementStyles,
+  SelectNameObjectKey
 };

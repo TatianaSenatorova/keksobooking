@@ -1,7 +1,7 @@
 import {
   adForm,
   adFormFieldsets,
-  mapFiltersForm,
+  filtersForm,
   mapFilterSelects,
 
 } from './dom-elements.js';
@@ -23,7 +23,7 @@ const disableForm = (form, fieldSets, disableClass, isDisable) => {
 
 const disablePage = (isDisable = true) => {
   disableForm(adForm, adFormFieldsets, DISABLE_CLASS_FORM, isDisable);
-  disableForm(mapFiltersForm, mapFilterSelects, DISABLE_CLASS_FILTERS, isDisable);
+  disableForm(filtersForm, mapFilterSelects, DISABLE_CLASS_FILTERS, isDisable);
 };
 
 

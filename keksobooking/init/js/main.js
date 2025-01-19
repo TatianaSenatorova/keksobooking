@@ -15,6 +15,7 @@ disablePage();
 getMap();
 try {
   const appartments = await getData();
+  console.log(appartments);
   saveData(appartments);
   renderMarkers(appartments);
 } catch {
