@@ -13,7 +13,7 @@ const TokioCoordinates = {
 const DISABLE_CLASS_FORM = 'ad-form--disabled';
 const DISABLE_CLASS_FILTERS = 'map__filters--disabled';
 
-const BASE_URL = 'https://25.javascript.htmlacademy.pro/keksobooking';
+const BASE_URL = 'https://25.javascript.htmlacademy.pro/keksobooking123';
 
 const Route = {
   GET_DATA: '/data',
@@ -25,9 +25,21 @@ const Method = {
   POST: 'POST',
 };
 
-const ErrorText = {
-  post: 'Не удалось отправить данные',
-  get: 'Не удалось получить данные'
+const ERROR_GET_MESSAGE = 'Не удалось получить данные';
+
+const ALERT_SHOW_TIME = 5000;
+
+const ErrorElementStyles = {
+  position: 'absolute',
+  top: '0',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  padding: '30px',
+  backgroundColor: '#FFA07A',
+  fontSize: '30px',
+  fontWeight: '700',
+  color: 'white'
 };
 
 export {
@@ -42,5 +54,7 @@ export {
   BASE_URL,
   Route,
   Method,
-  ErrorText
+  ERROR_GET_MESSAGE,
+  ALERT_SHOW_TIME,
+  ErrorElementStyles
 };
