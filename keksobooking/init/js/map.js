@@ -1,15 +1,26 @@
-// const map = L.map('map-canvas', {
-//   preferCanvas: true,
-// }).setView([51.505, -0.09], 13);
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+import {
+  MAP_LEAFLET,
+  TILE_LAYER,
+  MAX_MAP_ZOOM,
+  CURRENT_ZOOM,
+  MAP_ATTRIBUTION,
+  TokioCoordinates
+} from './constants.js';
+import { disablePage } from './form-advertisement.js';
 
-const map = L.map('map-canvas').setView([51.505, -0.09], 13);
-const a = 1;
+// import { disablePage } from './form-advertisement.js';
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-console.log(a);
+const getMap = () =>{
+  MAP_LEAFLET.on('load', () => {
+    disablePage(false);
+  });
 
-export { map, a };
+  MAP_LEAFLET.setView([TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE], CURRENT_ZOOM);
+
+  L.tileLayer(TILE_LAYER, {
+    maxZoom: MAX_MAP_ZOOM,
+    attribution: MAP_ATTRIBUTION
+  }).addTo(MAP_LEAFLET);
+};
+
+export {getMap};
