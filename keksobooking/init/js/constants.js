@@ -1,4 +1,3 @@
-const MAP_LEAFLET = L.map('map-canvas');
 const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const MAX_MAP_ZOOM = 19;
 const CURRENT_ZOOM = 14;
@@ -25,7 +24,8 @@ const Method = {
   POST: 'POST',
 };
 
-const ERROR_GET_MESSAGE = 'Не удалось получить данные';
+const ERROR_MESSAGE_MAP = 'Не удалось загрузить карту';
+const ERROR_MESSAGE_DATA = 'Не удалось получить данные';
 
 const ALERT_SHOW_TIME = 5000;
 
@@ -42,16 +42,34 @@ const ErrorElementStyles = {
   color: 'white'
 };
 
-const SelectNameObjectKey = {
+const SelectNameFilterKeys = {
   'housing-type': 'type',
   'housing-price': 'price',
   'housing-rooms': 'rooms',
   'housing-guests': 'guests',
-  'features': 'features',
+  'features': 'features'
+};
+
+const PriceRange = {
+  any: {
+    min: 0,
+    max: Infinity
+  },
+  middle: {
+    min: 10000,
+    max: 50000
+  },
+  low: {
+    min: 0,
+    max: 10000
+  },
+  high: {
+    min: 50000,
+    max: Infinity
+  }
 };
 
 export {
-  MAP_LEAFLET,
   TILE_LAYER,
   MAX_MAP_ZOOM,
   CURRENT_ZOOM,
@@ -62,8 +80,10 @@ export {
   BASE_URL,
   Route,
   Method,
-  ERROR_GET_MESSAGE,
+  ERROR_MESSAGE_MAP,
+  ERROR_MESSAGE_DATA,
   ALERT_SHOW_TIME,
   ErrorElementStyles,
-  SelectNameObjectKey
+  SelectNameFilterKeys,
+  PriceRange
 };

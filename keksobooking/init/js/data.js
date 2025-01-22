@@ -1,8 +1,15 @@
 let appartments = [];
+let map;
 
 const saveData = (newAppartments) =>{
-  appartments = newAppartments;
+  appartments = structuredClone(newAppartments);
   return appartments;
 };
 
-export {saveData};
+const saveMap = (mapData) =>{
+  map = mapData;
+  console.log(map);
+  return map;
+};
+
+export {saveData, saveMap};

@@ -1,8 +1,9 @@
 import {
-  ALERT_SHOW_TIME
+  ALERT_SHOW_TIME,
+  ErrorElementStyles
 } from './constants.js';
 
-const addTagTimeout = (text, objStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
+const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
   element.textContent = text;
   for (const key in objStyles) {
@@ -14,4 +15,4 @@ const addTagTimeout = (text, objStyles, tag = 'div', parent = document.body, ale
   }, alertTime);
 };
 
-export { addTagTimeout };
+export { addTagError };
