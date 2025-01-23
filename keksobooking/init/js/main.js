@@ -4,8 +4,7 @@ import { getData } from './api.js';
 import { addTagError } from './utils.js';
 import {
   ERROR_MESSAGE_MAP,
-  ERROR_MESSAGE_DATA,
-  ErrorElementStyles
+  ERROR_MESSAGE_DATA
 } from './constants.js';
 import { renderMarkers} from './render-appartments.js';
 import './map.js';

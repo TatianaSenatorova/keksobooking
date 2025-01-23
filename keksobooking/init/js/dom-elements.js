@@ -2,7 +2,12 @@ const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
 const filtersForm = document.querySelector('.map__filters');
 const mapFilterSelects = filtersForm.querySelectorAll('.map__filter');
-const checkBoxes = filtersForm.querySelectorAll('.map__checkbox');
+
+const typeSelect = filtersForm.querySelector('#housing-type');
+const priceSelect = filtersForm.querySelector('#housing-price');
+const roomSelect = filtersForm.querySelector('#housing-rooms');
+const featureCheckBoxes = filtersForm.querySelectorAll('.map__checkbox');
+
 const map = document.querySelector('.map__canvas');
 const formMap = document.querySelector('.map__filters');
 
@@ -11,7 +16,10 @@ export {
   adFormFieldsets,
   filtersForm,
   mapFilterSelects,
-  checkBoxes,
+  typeSelect,
+  priceSelect,
+  roomSelect,
+  featureCheckBoxes,
   map,
-  formMap,
+  formMap
 };

@@ -42,14 +42,6 @@ const ErrorElementStyles = {
   color: 'white'
 };
 
-const SelectNameFilterKeys = {
-  'housing-type': 'type',
-  'housing-price': 'price',
-  'housing-rooms': 'rooms',
-  'housing-guests': 'guests',
-  'features': 'features'
-};
-
 const PriceRange = {
   any: {
     min: 0,
@@ -69,6 +61,8 @@ const PriceRange = {
   }
 };
 
+const DEFAULT_SELECT_VALUE = 'any';
+
 export {
   TILE_LAYER,
   MAX_MAP_ZOOM,
@@ -84,6 +78,6 @@ export {
   ERROR_MESSAGE_DATA,
   ALERT_SHOW_TIME,
   ErrorElementStyles,
-  SelectNameFilterKeys,
-  PriceRange
+  PriceRange,
+  DEFAULT_SELECT_VALUE
 };
