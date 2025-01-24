@@ -9,6 +9,20 @@ const TokioCoordinates = {
   LONGITUDE: 139.753927
 };
 
+const specialMarker = L.icon({
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [52, ],
+  iconAnchor: [10, 38],
+  popupAnchor: [-3, -30],
+});
+
+const appartmentMarker = L.icon({
+  iconUrl: '../img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [10, 38],
+  popupAnchor: [-3, -30]
+});
+
 const DISABLE_CLASS_FORM = 'ad-form--disabled';
 const DISABLE_CLASS_FILTERS = 'map__filters--disabled';
 
@@ -23,6 +37,9 @@ const Method = {
   GET: 'GET',
   POST: 'POST',
 };
+
+const APPARTMENTS_TO_RENDER = 10;
+const DEBOUNCE_DELAY = 500;
 
 const ERROR_MESSAGE_MAP = 'Не удалось загрузить карту';
 const ERROR_MESSAGE_DATA = 'Не удалось получить данные';
@@ -69,11 +86,15 @@ export {
   CURRENT_ZOOM,
   MAP_ATTRIBUTION,
   TokioCoordinates,
+  specialMarker,
+  appartmentMarker,
   DISABLE_CLASS_FORM,
   DISABLE_CLASS_FILTERS,
   BASE_URL,
   Route,
   Method,
+  APPARTMENTS_TO_RENDER,
+  DEBOUNCE_DELAY,
   ERROR_MESSAGE_MAP,
   ERROR_MESSAGE_DATA,
   ALERT_SHOW_TIME,

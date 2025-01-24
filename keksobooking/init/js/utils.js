@@ -1,7 +1,16 @@
 import {
   ALERT_SHOW_TIME,
-  ErrorElementStyles
+  ErrorElementStyles,
+  DEBOUNCE_DELAY
 } from './constants.js';
+
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 
 const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
@@ -15,4 +24,4 @@ const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent =
   }, alertTime);
 };
 
-export { addTagError };
+export { addTagError, debounce };
