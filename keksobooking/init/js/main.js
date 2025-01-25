@@ -18,6 +18,7 @@ getMap()
   .then((map) => {
     getData()
       .then((appartments)=>{
+        console.log(appartments);
         disablePage(false);
         renderMarkers(appartments);
         setFilters(appartments);

@@ -7,8 +7,7 @@ import {
 } from './dom-elements.js';
 import {
   PriceRange,
-  DEFAULT_SELECT_VALUE,
-  DEBOUNCE_DELAY,
+  DEFAULT_SELECT_VALUE
 } from './constants.js';
 import { renderMarkers } from './map.js';
 import { debounce } from './utils.js';
@@ -42,7 +41,8 @@ const FiltersFunctions = {
     const checkboxes = Array.from(featureCheckBoxes);
     if(checkboxes.every((checkbox) => !checkbox.checked)) {
       return true;
-    } else if (checkboxes.some((checkbox) => checkbox.checked) && !appartment.offer.features) {
+    } else if (checkboxes.some((checkbox) => checkbox.checked) &&
+     !appartment.offer.features) {
       return false;
     } return checkCheckboxes(appartment, checkboxes);
   }
