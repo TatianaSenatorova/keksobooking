@@ -60,13 +60,11 @@ const getFilteredAppartments = () => {
       filteredAppartments.push(appartments[i]);
     }
   }
-  console.log(filteredAppartments);
   debounceRender(filteredAppartments);
 };
 
 const setFilters = (appartmentsData) => {
   appartments = appartmentsData;
-  console.log(appartments);
   filtersForm.addEventListener('change', () => getFilteredAppartments());
 };
 

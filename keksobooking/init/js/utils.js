@@ -23,6 +23,18 @@ const findTemplate = (id) => {
   return template.content.firstElementChild;
 };
 
+const getPostfix = (value, words) =>{
+  const number = Math.abs(value);
+  if (number % 10 === 0 || number % 10 >= 5 || (number >= 10 && number < 20)) {
+    return words[0];
+  } else if (!number){
+    return '';
+  }else if (number % 10 === 1) {
+    return words[1];
+  }
+  return words[2];
+};
+
 const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
   element.textContent = text;
@@ -35,4 +47,4 @@ const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent =
   }, alertTime);
 };
 
-export { addTagError, debounce, findTemplate };
+export { addTagError, debounce, findTemplate, getPostfix };

@@ -1,7 +1,8 @@
 const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const MAX_MAP_ZOOM = 19;
 const CURRENT_ZOOM = 14;
-const MAP_ATTRIBUTION ='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const MAP_ATTRIBUTION =
+  '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
 const TokioCoordinates = {
   LATITUDE: 35.681729,
@@ -82,63 +83,85 @@ const DEFAULT_SELECT_VALUE = 'any';
 const PopupClasses = [
   {
     CLASS_NAME: 'popup__avatar',
-    ELEMENT_NAME: 'avatar'
+    DATA_KEY: 'avatar',
   },
   {
     CLASS_NAME: 'popup__title',
-    ELEMENT_NAME: 'title'
+    DATA_KEY: 'title',
   },
   {
     CLASS_NAME: 'popup__text--address',
-    ELEMENT_NAME: 'address'
+    DATA_KEY: 'address',
   },
   {
     CLASS_NAME: 'popup__text--price',
-    ELEMENT_NAME: 'price'
+    DATA_KEY: 'price',
   },
   {
     CLASS_NAME: 'popup__type',
-    ELEMENT_NAME: 'type'
+    DATA_KEY: 'type',
   },
   {
     CLASS_NAME: 'popup__text--capacity',
-    ELEMENT_NAME: 'capacity',
+    DATA_KEY: 'capacity',
     ROOMS: 'rooms',
-    GUESTS: 'guests'
+    GUESTS: 'guests',
   },
   {
     CLASS_NAME: 'popup__text--time',
-    ELEMENT_NAME: 'time',
+    DATA_KEY: 'time',
     CHECKIN: 'checkin',
-    CHECKOUT: 'checkout'
-
+    CHECKOUT: 'checkout',
   },
   {
     CLASS_NAME: 'popup__feature',
-    ELEMENT_NAME: 'features'
-  }
+    DATA_KEY: 'features',
+    MODIFIERS: [
+      'wifi',
+      'dishwasher',
+      'parking',
+      'washer',
+      'elevator',
+      'conditioner',
+    ],
+  },
+
+  {
+    CLASS_NAME: 'popup__description',
+    DATA_KEY: 'description',
+  },
   // {
   //   CLASS_NAME: 'popup__feature--dishwasher',
-  //   ELEMENT_NAME: 'dishwasher'
+  //   DATA_KEY: 'dishwasher'
   // },
   // {
   //   CLASS_NAME: 'popup__feature--parking',
-  //   ELEMENT_NAME: 'parking'
+  //   DATA_KEY: 'parking'
   // },
   // {
   //   CLASS_NAME: 'popup__feature--washer',
-  //   ELEMENT_NAME: 'washer'
+  //   DATA_KEY: 'washer'
   // },
   // {
   //   CLASS_NAME: 'popup__feature--elevator',
-  //   ELEMENT_NAME: 'elevator'
+  //   DATA_KEY: 'elevator'
   // },
   // {
   //   CLASS_NAME: 'popup__feature--conditioner',
-  //   ELEMENT_NAME: 'conditioner'
+  //   DATA_KEY: 'conditioner'
   // }
 ];
 
+const PostfixRooms = ['комнат', 'комната', 'комнаты'];
+const PostfixGuests = ['гостей', 'гостя', 'гостей'];
+
+const Accomodation = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  hotel: 'Отель',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+};
 
 export {
   TILE_LAYER,
@@ -162,4 +185,7 @@ export {
   PriceRange,
   DEFAULT_SELECT_VALUE,
   PopupClasses,
+  PostfixRooms,
+  PostfixGuests,
+  Accomodation,
 };
