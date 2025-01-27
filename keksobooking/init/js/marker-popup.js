@@ -10,28 +10,23 @@ const template = findTemplate('card');
 
 const popup = template.cloneNode(true);
 
-const contentAvatar = (tag, appartment, popupClass) => {
-  tag.src = appartment.author[popupClass.DATA_KEY]
-    ? `../${appartment.author[popupClass.DATA_KEY]}`
-    : '';
+const findDomElement = (className) => popup.querySelector(`.${className}`);
+const findDomElements = (className) => popup.querySelectorAll(`.${className}`);
+
+const contentAvatar = (tag, dataKey) => {
+  tag.src = dataKey ? `../${dataKey}` : '';
 };
 
-const contentCapacity = (tag, appartment, popupClass) => {
-  if (
-    !appartment.offer[popupClass.ROOMS] &&
-    !appartment.offer[popupClass.GUESTS]
-  ) {
+const contentCapacity = (tag, dataKeyRooms, dataKeyGuests) => {
+  if (!dataKeyRooms && !dataKeyGuests) {
     tag.textContent = '';
   } else {
-    const rooms = appartment.offer[popupClass.ROOMS]
-      ? `${appartment.offer[popupClass.ROOMS]} ${getPostfix(
-        appartment.offer[popupClass.ROOMS],
-        PostfixRooms
-      )}`
+    const rooms = dataKeyRooms
+      ? `${dataKeyRooms} ${getPostfix(dataKeyRooms, PostfixRooms)}`
       : '';
-    const guests = appartment.offer[popupClass.GUESTS]
-      ? `для ${appartment.offer[popupClass.GUESTS]} ${getPostfix(
-        appartment.offer[popupClass.GUESTS],
+    const guests = dataKeyGuests
+      ? `для ${dataKeyGuests} ${getPostfix(
+        dataKeyGuests,
         PostfixGuests
       )}`
       : '';
@@ -39,95 +34,76 @@ const contentCapacity = (tag, appartment, popupClass) => {
   }
 };
 
-const contentTime = (tag, appartment, popupClass) => {
-  if (
-    !appartment.offer[popupClass.CHECKIN] &&
-    !appartment.offer[popupClass.CHECKOUT]
-  ) {
+const contentTime = (tag, dataKeyCheckIn, dataKeyCheckOut) => {
+  if (!dataKeyCheckIn && !dataKeyCheckOut) {
     tag.textContent = '';
   } else {
-    const checkin = appartment.offer[popupClass.CHECKIN] ? `Заезд после ${
-      appartment.offer[popupClass.CHECKIN]}, ` : '';
-    const checkout = appartment.offer[popupClass.CHECKOUT] ? `выезд до ${appartment.offer[popupClass.CHECKOUT]}` : '';
+    const checkin = dataKeyCheckIn ? `Заезд после ${
+      dataKeyCheckIn}, ` : '';
+    const checkout = dataKeyCheckOut ? `выезд до ${dataKeyCheckOut}` : '';
     tag.textContent = `${checkin} ${checkout}`;
   }
 };
 
-
-const contentPrice = (tag, appartment, popupClass) => {
-  if (appartment.offer[popupClass.DATA_KEY]) {
-    tag.innerHTML = `${
-      appartment.offer[popupClass.DATA_KEY]
-    }<span> ₽/ночь</span>`;
+const contentPrice = (tag, dataKey) => {
+  if (dataKey) {
+    tag.innerHTML = `${ dataKey }<span> ₽/ночь</span>`;
   } else {
     tag.innerHTML = '';
   }
 };
 
-const contentDefault = (tag, appartment, popupClass, isAccomodation) => {
-  if (!appartment.offer[popupClass.DATA_KEY]) {
+const contentDefault = (tag, dataKey, isAccomodation) => {
+  if (!dataKey) {
     tag.textContent = '';
   } else {
     tag.textContent = isAccomodation
-      ? Accomodation[appartment.offer[popupClass.DATA_KEY]]
-      : appartment.offer[popupClass.DATA_KEY];
+      ? Accomodation[dataKey]
+      : dataKey;
   }
 };
 
-const contentFeatures = (appartmentFeatures, popupClass) => {
-  if (appartmentFeatures) {
-    Array.from(popup.querySelectorAll(`.${popupClass.CLASS_NAME}`)
-    ).forEach((item) => item.classList.remove('visually-hidden'));
-    popupClass.MODIFIERS.map((feature) => {
-      if (!appartmentFeatures.includes(feature)) {
-        popup
-          .querySelector(`.${popupClass.CLASS_NAME}--${feature}`)
-          .classList.add('visually-hidden');
-      }
-    });
-  }
+const hideFeatures = (featuresDomArray) => featuresDomArray.map((feature) => feature.classList.add('visually-hidden'));
+
+const contentFeatures = (appartmentFeatures, featuresDomArray,popupClass) => {
+  featuresDomArray.forEach((item) => item.classList.remove('visually-hidden'));
+  popupClass.MODIFIERS.map((modifier) => {
+    if (!appartmentFeatures.includes(modifier)) {
+      popup
+        .querySelector(`.${popupClass.CLASS_NAME}--${modifier}`)
+        .classList.add('visually-hidden');
+    }
+  });
 };
 
 const createPopup = (appartment) => {
   PopupClasses.map((popupClass) => {
     switch (popupClass.DATA_KEY) {
       case 'avatar':
-        {
-          const avatar = popup.querySelector(`.${popupClass.CLASS_NAME}`);
-          contentAvatar(avatar, appartment, popupClass);
-        }
+        contentAvatar(findDomElement(popupClass.CLASS_NAME), appartment.author[popupClass.DATA_KEY]);
         break;
       case 'capacity':
-        {
-          const capacity = popup.querySelector(`.${popupClass.CLASS_NAME}`);
-          contentCapacity(capacity, appartment, popupClass);
-        }
+        contentCapacity(findDomElement(popupClass.CLASS_NAME), appartment.offer[popupClass.ROOMS], appartment.offer[popupClass.GUESTS]);
         break;
       case 'time':
-        {
-          const time = popup.querySelector(`.${popupClass.CLASS_NAME}`);
-          contentTime(time, appartment, popupClass);
-        }
+        contentTime(findDomElement(popupClass.CLASS_NAME), appartment.offer[popupClass.CHECKIN], appartment.offer[popupClass.CHECKOUT]);
         break;
-      case 'features': {
-        const appartmentFeatures = appartment.offer.features;
-        contentFeatures(appartmentFeatures, popupClass);
-        break;
+      case 'features':{
+        const featuresDomArray = Array.from(findDomElements(popupClass.CLASS_NAME));
+        const appartmentFeatures = appartment.offer[popupClass.DATA_KEY] ? appartment.offer[popupClass.DATA_KEY] : hideFeatures(featuresDomArray);
+        contentFeatures(appartmentFeatures, featuresDomArray, popupClass);
       }
+        break;
       case 'price':
-        {
-          const element = popup.querySelector(`.${popupClass.CLASS_NAME}`);
-          contentPrice(element, appartment, popupClass);
-        }
+        contentPrice(findDomElement(popupClass.CLASS_NAME), appartment.offer[popupClass.DATA_KEY]);
         break;
       default:
         {
-          const element = popup.querySelector(`.${popupClass.CLASS_NAME}`);
           let isAccomodation = false;
           if (popupClass.DATA_KEY === 'type') {
             isAccomodation = true;
           }
-          contentDefault(element, appartment, popupClass, isAccomodation);
+          contentDefault(findDomElement(popupClass.CLASS_NAME), appartment.offer[popupClass.DATA_KEY], isAccomodation);
         }
         break;
     }

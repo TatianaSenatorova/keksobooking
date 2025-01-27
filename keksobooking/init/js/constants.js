@@ -83,6 +83,7 @@ const DEFAULT_SELECT_VALUE = 'any';
 const PopupClasses = [
   {
     CLASS_NAME: 'popup__avatar',
+    // PATH_TO_KEY: 'appartment.author.avatar',
     DATA_KEY: 'avatar',
   },
   {
