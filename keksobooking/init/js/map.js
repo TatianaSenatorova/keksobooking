@@ -8,7 +8,7 @@ import {
   appartmentMarker,
   APPARTMENTS_TO_RENDER
 } from './constants.js';
-import { createPopup } from './marker-popup.js';
+import { createCard } from './card.js';
 
 let map;
 
@@ -39,7 +39,7 @@ const renderMarkers = (appartmentsArray) => {
       [appartment.location.lat, appartment.location.lng],
       { icon: appartmentMarker }
     ).addTo(map);
-    marker.bindPopup(() => createPopup(appartment));
+    marker.bindPopup(() => createCard(appartment));
     // const popup = L.popup()
     //   .setLatLng(latlng)
     //   .setContent('<p>Hello world!<br />This is a nice popup.</p>')
