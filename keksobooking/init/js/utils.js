@@ -35,6 +35,19 @@ const getPostfix = (value, words) =>{
   return words[2];
 };
 
+const getAllKeys = (object) =>{
+  let keys = [];
+  for (const key in object) {
+    if(object[key]) {
+      keys.push(key);
+    }
+    if (typeof object[key] === 'object') {
+      keys = keys.concat(getAllKeys(object[key]));
+    }
+  }
+  return keys;
+};
+
 const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
   element.textContent = text;
@@ -47,4 +60,4 @@ const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent =
   }, alertTime);
 };
 
-export { addTagError, debounce, findTemplate, getPostfix };
+export { addTagError, debounce, findTemplate, getPostfix, getAllKeys };

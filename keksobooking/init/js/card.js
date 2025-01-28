@@ -1,10 +1,14 @@
 import {
-  PopupClasses,
+  AllKeysForCard,
   PostfixGuests,
   PostfixRooms,
   Accomodation,
 } from './constants.js';
-import { findTemplate, getPostfix } from './utils.js';
+import {
+  findTemplate,
+  getPostfix,
+  getAllKeys
+} from './utils.js';
 
 const template = findTemplate('card');
 
@@ -12,7 +16,7 @@ const fillAvatar = (tag, dataKey) => {
   tag.src = dataKey ? `../${dataKey}` : '';
 };
 
-const isExistKey = (firstKey, secondKey = true) =>!firstKey && !secondKey;
+const isExistKey = (firstKey, secondKey = true) =>firstKey || secondKey;
 
 const fillCapacity = (tag, dataKeyRooms, dataKeyGuests) => {
   if(isExistKey(dataKeyRooms, dataKeyGuests)){
@@ -50,13 +54,12 @@ const fillDefault = (tag, dataKey, isAccomodation = false) => {
 
 const hideFeatures = (featuresDomArray) => featuresDomArray.map((feature) => feature.classList.add('visually-hidden'));
 
-const fillFeatures = (featuresParent, appartmentFeatures, featuresDomArray, popupClass) => {
-  featuresDomArray.forEach((item) => item.classList.remove('visually-hidden'));
-  popupClass.MODIFIERS.map((modifier) => {
-    if (!appartmentFeatures.includes(modifier)) {
+const fillFeatures = (featuresParent, appartmentFeatures, featuresDomArray, PopupKeys) => {
+  PopupKeys.MODIFIERS.map((modifier) => {
+    if (appartmentFeatures.includes(modifier)) {
       featuresParent
-        .querySelector(`.${popupClass.CLASS_NAME}--${modifier}`)
-        .classList.add('visually-hidden');
+        .querySelector(`.${PopupKeys.CLASS_NAME}--${modifier}`)
+        .classList.remove('visually-hidden');
     }
   });
 };
@@ -96,60 +99,66 @@ const clearCard = (popup, appartment, cb) => {
   cb(appartment, popup, avatar, title, address, price, type, capacity, time, featuresParent, featuresNodeList, description, photosParent, photo);
 };
 
+
 const fillCard = (appartment, popup, avatar, title, address, price, type, capacity, time, featuresParent, featuresNodeList, description, photosParent, photo) => {
-  PopupClasses.map((popupClass) => {
-    switch (popupClass.DATA_KEY) {
-      case 'avatar':
-        fillAvatar(avatar, appartment.author[popupClass.DATA_KEY]);
-        break;
-      case 'capacity':
-        fillCapacity(capacity, appartment.offer[popupClass.ROOMS], appartment.offer[popupClass.GUESTS]);
-        break;
-      case 'time':
-        fillTime(time, appartment.offer[popupClass.CHECKIN], appartment.offer[popupClass.CHECKOUT]);
-        break;
-      case 'features': {
-        const featuresDomArray = Array.from(featuresNodeList);
-        if(appartment.offer[popupClass.DATA_KEY]) {
-          fillFeatures(featuresParent, appartment.offer[popupClass.DATA_KEY], featuresDomArray, popupClass);
-        }
-      }
-        break;
-      case 'price':
-        fillPrice(price, appartment.offer[popupClass.DATA_KEY]);
-        break;
-      case 'photos': {
-        if(appartment.offer[popupClass.DATA_KEY]) {
-          renderPhotos(photosParent, appartment.offer[popupClass.DATA_KEY], photo);
-        }
-      }
-        break;
-      case 'type': {
-        const isAccomodation = true;
-        fillDefault(type, appartment.offer[popupClass.DATA_KEY], isAccomodation);
-      }
-        break;
-      case 'title': {
-        fillDefault(title, appartment.offer[popupClass.DATA_KEY]);
-      }
-        break;
-      case 'description': {
-        fillDefault(description, appartment.offer[popupClass.DATA_KEY]);
-      }
-        break;
-      case 'address': {
-        fillDefault(address, appartment.offer[popupClass.DATA_KEY]);
-      }
-        break;
-    }
-  });
-  return popup;
+
+
+  // PopupKeyses.map((PopupKeys) => {
+  //   switch (PopupKeys.DATA_KEY) {
+  //     case 'avatar':
+  //       fillAvatar(avatar, appartment.author[PopupKeys.DATA_KEY]);
+  //       break;
+  //     case 'capacity':
+  //       fillCapacity(capacity, appartment.offer[PopupKeys.ROOMS], appartment.offer[PopupKeys.GUESTS]);
+  //       break;
+  //     case 'time':
+  //       fillTime(time, appartment.offer[PopupKeys.CHECKIN], appartment.offer[PopupKeys.CHECKOUT]);
+  //       break;
+  //     case 'features': {
+  //       const featuresDomArray = Array.from(featuresNodeList);
+  //       if(appartment.offer[PopupKeys.DATA_KEY]) {
+  //         fillFeatures(featuresParent, appartment.offer[PopupKeys.DATA_KEY], featuresDomArray, PopupKeys);
+  //       }
+  //     }
+  //       break;
+  //     case 'price':
+  //       fillPrice(price, appartment.offer[PopupKeys.DATA_KEY]);
+  //       break;
+  //     case 'photos': {
+  //       if(appartment.offer[PopupKeys.DATA_KEY]) {
+  //         renderPhotos(photosParent, appartment.offer[PopupKeys.DATA_KEY], photo);
+  //       }
+  //     }
+  //       break;
+  //     case 'type': {
+  //       const isAccomodation = true;
+  //       fillDefault(type, appartment.offer[PopupKeys.DATA_KEY], isAccomodation);
+  //     }
+  //       break;
+  //     case 'title': {
+  //       fillDefault(title, appartment.offer[PopupKeys.DATA_KEY]);
+  //     }
+  //       break;
+  //     case 'description': {
+  //       fillDefault(description, appartment.offer[PopupKeys.DATA_KEY]);
+  //     }
+  //       break;
+  //     case 'address': {
+  //       fillDefault(address, appartment.offer[PopupKeys.DATA_KEY]);
+  //     }
+  //       break;
+  //   }
+  // });
+  // return popup;
 };
 
+const filterKeys = (allDataKeys) => allDataKeys.filter((key) => AllKeysForCard.includes(key));
 
 const createCard = (appartment) => {
   const popup = template.cloneNode(true);
   clearCard(popup, appartment, fillCard);
+  const existedKeys = filterKeys(getAllKeys(appartment));
+  console.log(existedKeys);
   return popup;
 };
 

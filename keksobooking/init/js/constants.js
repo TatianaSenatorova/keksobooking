@@ -80,62 +80,65 @@ const PriceRange = {
 
 const DEFAULT_SELECT_VALUE = 'any';
 
-const PopupClasses = [
-  {
-    CLASS_NAME: 'popup__avatar',
-    DATA_KEY: 'avatar',
-  },
-  {
-    CLASS_NAME: 'popup__title',
-    DATA_KEY: 'title',
-  },
-  {
-    CLASS_NAME: 'popup__text--address',
-    DATA_KEY: 'address',
-  },
-  {
-    CLASS_NAME: 'popup__text--price',
-    DATA_KEY: 'price',
-  },
-  {
-    CLASS_NAME: 'popup__type',
-    DATA_KEY: 'type',
-  },
-  {
-    CLASS_NAME: 'popup__text--capacity',
-    DATA_KEY: 'capacity',
-    ROOMS: 'rooms',
-    GUESTS: 'guests',
-  },
-  {
-    CLASS_NAME: 'popup__text--time',
-    DATA_KEY: 'time',
-    CHECKIN: 'checkin',
-    CHECKOUT: 'checkout',
-  },
-  {
-    CLASS_NAME: 'popup__feature',
-    DATA_KEY: 'features',
-    MODIFIERS: [
-      'wifi',
-      'dishwasher',
-      'parking',
-      'washer',
-      'elevator',
-      'conditioner',
-    ],
-  },
+const AllKeysForCard = ['avatar', 'title', 'address', 'price', 'type', 'rooms', 'guests', 'checkin', 'checkout', 'features', 'description', 'photos'];
 
-  {
-    CLASS_NAME: 'popup__description',
-    DATA_KEY: 'description',
-  },
-  {
-    CLASS_NAME: 'popup__photos',
-    CLASS_NAME_CHILDREN: 'popup__photo',
-    DATA_KEY: 'photos'
-  },
-];
+
+// const PopupKeys = [
+//   {
+//     // CLASS_NAME: 'popup__avatar',
+//     DATA_KEY: 'avatar',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__title',
+//     DATA_KEY: 'title',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__text--address',
+//     DATA_KEY: 'address',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__text--price',
+//     DATA_KEY: 'price',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__type',
+//     DATA_KEY: 'type',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__text--capacity',
+//     DATA_KEY: 'capacity',
+//     ROOMS: 'rooms',
+//     GUESTS: 'guests',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__text--time',
+//     DATA_KEY: 'time',
+//     CHECKIN: 'checkin',
+//     CHECKOUT: 'checkout',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__feature',
+//     DATA_KEY: 'features',
+//     MODIFIERS: [
+//       'wifi',
+//       'dishwasher',
+//       'parking',
+//       'washer',
+//       'elevator',
+//       'conditioner',
+//     ],
+//   },
+
+//   {
+//     // CLASS_NAME: 'popup__description',
+//     DATA_KEY: 'description',
+//   },
+//   {
+//     // CLASS_NAME: 'popup__photos',
+//     CLASS_NAME_CHILDREN: 'popup__photo',
+//     DATA_KEY: 'photos'
+//   },
+// ];
 
 const PostfixRooms = ['комнат', 'комната', 'комнаты'];
 const PostfixGuests = ['гостей', 'гостя', 'гостей'];
@@ -169,7 +172,7 @@ export {
   ErrorElementStyles,
   PriceRange,
   DEFAULT_SELECT_VALUE,
-  PopupClasses,
+  AllKeysForCard,
   PostfixRooms,
   PostfixGuests,
   Accomodation,
