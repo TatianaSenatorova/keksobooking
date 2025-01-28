@@ -83,7 +83,6 @@ const DEFAULT_SELECT_VALUE = 'any';
 const PopupClasses = [
   {
     CLASS_NAME: 'popup__avatar',
-    // PATH_TO_KEY: 'appartment.author.avatar',
     DATA_KEY: 'avatar',
   },
   {
@@ -131,26 +130,11 @@ const PopupClasses = [
     CLASS_NAME: 'popup__description',
     DATA_KEY: 'description',
   },
-  // {
-  //   CLASS_NAME: 'popup__feature--dishwasher',
-  //   DATA_KEY: 'dishwasher'
-  // },
-  // {
-  //   CLASS_NAME: 'popup__feature--parking',
-  //   DATA_KEY: 'parking'
-  // },
-  // {
-  //   CLASS_NAME: 'popup__feature--washer',
-  //   DATA_KEY: 'washer'
-  // },
-  // {
-  //   CLASS_NAME: 'popup__feature--elevator',
-  //   DATA_KEY: 'elevator'
-  // },
-  // {
-  //   CLASS_NAME: 'popup__feature--conditioner',
-  //   DATA_KEY: 'conditioner'
-  // }
+  {
+    CLASS_NAME: 'popup__photos',
+    CLASS_NAME_CHILDREN: 'popup__photo',
+    DATA_KEY: 'photos'
+  },
 ];
 
 const PostfixRooms = ['комнат', 'комната', 'комнаты'];
