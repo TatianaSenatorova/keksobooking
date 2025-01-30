@@ -1,3 +1,5 @@
+import { getPostfix } from './utils.js';
+
 const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const MAX_MAP_ZOOM = 19;
 const CURRENT_ZOOM = 14;
@@ -85,6 +87,20 @@ const AllKeysForCard = ['avatar', 'title', 'address', 'price', 'type', 'rooms', 
 const PostfixRooms = ['комнат', 'комната', 'комнаты'];
 const PostfixGuests = ['гостей', 'гостя', 'гостей'];
 
+const CapacitySentence = {
+  FIRST: '',
+  SECOND: (dataKeyRooms) => getPostfix(dataKeyRooms, PostfixRooms),
+  THIRD: 'для ',
+  FORTH: (dataKeyRooms) => getPostfix(dataKeyRooms, PostfixGuests),
+};
+
+const TimeSentence = {
+  FIRST: 'Заезд после ',
+  SECOND: () => '',
+  THIRD: 'выезд до ',
+  FORTH: () => ''
+};
+
 const Accomodation = {
   palace: 'Дворец',
   flat: 'Квартира',
@@ -117,5 +133,7 @@ export {
   AllKeysForCard,
   PostfixRooms,
   PostfixGuests,
-  Accomodation
+  Accomodation,
+  CapacitySentence,
+  TimeSentence
 };

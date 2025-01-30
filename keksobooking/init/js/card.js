@@ -1,12 +1,11 @@
 import {
   AllKeysForCard,
-  PostfixGuests,
-  PostfixRooms,
-  Accomodation
+  Accomodation,
+  CapacitySentence,
+  TimeSentence
 } from './constants.js';
 import {
   findTemplate,
-  getPostfix,
   getAllKeys
 } from './utils.js';
 
@@ -17,21 +16,14 @@ const fillAvatar = (tag, dataKey) => {
   tag.src = `../${dataKey}`;
 };
 
-const fillCapacity = (tag, dataKeyRooms, dataKeyGuests) => {
-  const rooms = dataKeyRooms
-    ? `${dataKeyRooms} ${getPostfix(dataKeyRooms, PostfixRooms)}`
+const fillSentence = (tag, dataKeyFirst, dataKeySecond, Sentence) => {
+  const firstData = dataKeyFirst
+    ? `${Sentence.FIRST}${dataKeyFirst} ${Sentence.SECOND(dataKeyFirst)}`
     : '';
-  const guests = dataKeyGuests
-    ? `для ${dataKeyGuests} ${getPostfix(dataKeyGuests, PostfixGuests)}`
+  const secondData = dataKeySecond
+    ? `${Sentence.THIRD} ${dataKeySecond} ${Sentence.FORTH(dataKeySecond)}`
     : '';
-  tag.textContent = `${rooms} ${guests}`;
-};
-
-const fillTime = (tag, dataKeyCheckIn, dataKeyCheckOut) => {
-  const checkin = dataKeyCheckIn ? `Заезд после ${
-    dataKeyCheckIn}, ` : '';
-  const checkout = dataKeyCheckOut ? `выезд до ${dataKeyCheckOut}` : '';
-  tag.textContent = `${checkin} ${checkout}`;
+  tag.textContent = `${firstData} ${secondData}`;
 };
 
 const fillPrice = (tag, dataKey) => {
@@ -98,11 +90,11 @@ const fillCard = (appartment, cardElements) => {
         break;
       case 'rooms':
       case 'guests':
-        fillCapacity(cardElements.capacity, appartment.offer.rooms, appartment.offer.guests);
+        fillSentence(cardElements.capacity, appartment.offer.rooms, appartment.offer.guests, CapacitySentence);
         break;
       case 'checkin':
       case 'checkout':
-        fillTime(cardElements.time, appartment.offer.checkin, appartment.offer.checkout);
+        fillSentence(cardElements.time, appartment.offer.checkin, appartment.offer.checkout, TimeSentence);
         break;
       case 'price':
         fillPrice(cardElements[key], appartment.offer[key]);
