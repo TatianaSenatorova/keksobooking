@@ -3,7 +3,7 @@ import {
   typeSelect,
   priceSelect,
   roomSelect,
-  featureCheckBoxes,
+  featureCheckBoxes
 } from './dom-elements.js';
 import {
   PriceRange,
@@ -60,6 +60,7 @@ const getFilteredAppartments = () => {
       filteredAppartments.push(appartments[i]);
     }
   }
+  console.log(filteredAppartments);
   debounceRender(filteredAppartments);
 };
 

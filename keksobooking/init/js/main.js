@@ -15,7 +15,7 @@ import { setFilters} from './form-filters.js';
 disablePage();
 
 getMap()
-  .then((map) => {
+  .then(() => {
     getData()
       .then((appartments)=>{
         disablePage(false);
@@ -24,8 +24,9 @@ getMap()
       })
       .catch(() => {
         addTagError(ERROR_MESSAGE_DATA);
-      })
-      .catch(() => {
-        addTagError(ERROR_MESSAGE_MAP);
       });
+  })
+  .catch(() => {
+    addTagError(ERROR_MESSAGE_MAP);
   });
+

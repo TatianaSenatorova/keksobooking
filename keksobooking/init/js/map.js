@@ -29,8 +29,6 @@ const getMap = async () => {
     [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
     { icon: specialMarker, draggable: true }
   ).addTo(map);
-
-  return map;
 };
 
 const renderMarkers = (appartmentsArray) => {
@@ -40,10 +38,6 @@ const renderMarkers = (appartmentsArray) => {
       { icon: appartmentMarker }
     ).addTo(map);
     marker.bindPopup(() => createCard(appartment));
-    // const popup = L.popup()
-    //   .setLatLng(latlng)
-    //   .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-    //   .openOn(map);
   });
 };
 
