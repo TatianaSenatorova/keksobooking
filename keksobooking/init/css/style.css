@@ -378,6 +378,22 @@ fieldset {
  border-radius: 2px;
 }
 
+.ad-form__slider {
+  height: 10px;
+}
+
+.ad-form__slider .noUi-connect {
+  background: #c0392b;
+}
+
+.ad-form__slider .noUi-handle {
+  height: 18px;
+  width: 18px;
+  top: -5px;
+  right: -9px;
+  border-radius: 9px;
+}
+
 .ad-form__label {
   display: block;
   padding-bottom: 5px;

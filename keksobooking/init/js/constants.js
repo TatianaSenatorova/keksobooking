@@ -115,3 +115,9 @@ export const MIN_TITLE_LENGTH = 30;
 export const MAX_TITLE_LENGTH = 100;
 export const MAX_PRICE = 100000;
 export const MIN_PRICE = 0;
+
+export const sliderValues = {
+  MIN: 0,
+  MAX: 100000,
+  START: 0
+};
