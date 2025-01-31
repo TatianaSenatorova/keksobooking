@@ -3,6 +3,7 @@ import {
   typeSelect,
   priceSelect,
   roomSelect,
+  guestSelect,
   featureCheckBoxes
 } from './dom-elements.js';
 import {
@@ -37,6 +38,9 @@ const FiltersFunctions = {
   ROOMS: (appartment) =>
     parseInt(roomSelect.value, 10) === appartment.offer.rooms ||
     roomSelect.value === DEFAULT_SELECT_VALUE,
+  GUESTS: (appartment) =>
+    parseInt(guestSelect.value, 10) === appartment.offer.rooms ||
+  guestSelect.value === DEFAULT_SELECT_VALUE,
   FEATURES: (appartment) => {
     const checkboxes = Array.from(featureCheckBoxes);
     if(checkboxes.every((checkbox) => !checkbox.checked)) {
@@ -55,6 +59,7 @@ const getFilteredAppartments = () => {
       FiltersFunctions.TYPE(appartments[i]) &&
       FiltersFunctions.PRICE(appartments[i]) &&
       FiltersFunctions.ROOMS(appartments[i]) &&
+      FiltersFunctions.GUESTS(appartments[i]) &&
       FiltersFunctions.FEATURES(appartments[i])
     ) {
       filteredAppartments.push(appartments[i]);

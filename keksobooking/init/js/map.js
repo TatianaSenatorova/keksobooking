@@ -11,6 +11,7 @@ import {
 import { createCard } from './card.js';
 
 let map;
+let markerGroup;
 
 const getMap = async () => {
   map = await L.map('map-canvas');
@@ -29,14 +30,21 @@ const getMap = async () => {
     [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
     { icon: specialMarker, draggable: true }
   ).addTo(map);
+
+  markerGroup = L.layerGroup().addTo(map);
+};
+
+const clearMarkerGroup = () => {
+  markerGroup.clearLayers();
 };
 
 const renderMarkers = (appartmentsArray) => {
+  clearMarkerGroup();
   appartmentsArray.slice(0, APPARTMENTS_TO_RENDER).map((appartment) => {
     const marker = L.marker(
       [appartment.location.lat, appartment.location.lng],
       { icon: appartmentMarker }
-    ).addTo(map);
+    ).addTo(markerGroup);
     marker.bindPopup(() => createCard(appartment));
   });
 };

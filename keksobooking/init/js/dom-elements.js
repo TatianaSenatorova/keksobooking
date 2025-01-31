@@ -1,25 +1,13 @@
-const adForm = document.querySelector('.ad-form');
-const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
-const filtersForm = document.querySelector('.map__filters');
-const mapFilterSelects = filtersForm.querySelectorAll('.map__filter');
+export const adForm = document.querySelector('.ad-form');
+export const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
+export const filtersForm = document.querySelector('.map__filters');
+export const mapFilterSelects = filtersForm.querySelectorAll('.map__filter');
 
-const typeSelect = filtersForm.querySelector('#housing-type');
-const priceSelect = filtersForm.querySelector('#housing-price');
-const roomSelect = filtersForm.querySelector('#housing-rooms');
-const featureCheckBoxes = filtersForm.querySelectorAll('.map__checkbox');
+export const typeSelect = filtersForm.querySelector('#housing-type');
+export const priceSelect = filtersForm.querySelector('#housing-price');
+export const roomSelect = filtersForm.querySelector('#housing-rooms');
+export const guestSelect = filtersForm.querySelector('#housing-guests');
+export const featureCheckBoxes = filtersForm.querySelectorAll('.map__checkbox');
 
-const map = document.querySelector('.map__canvas');
-const formMap = document.querySelector('.map__filters');
-
-export {
-  adForm,
-  adFormFieldsets,
-  filtersForm,
-  mapFilterSelects,
-  typeSelect,
-  priceSelect,
-  roomSelect,
-  featureCheckBoxes,
-  map,
-  formMap
-};
+export const map = document.querySelector('.map__canvas');
+export const formMap = document.querySelector('.map__filters');
