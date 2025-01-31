@@ -113,4 +113,5 @@ export const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
 
 export const MIN_TITLE_LENGTH = 30;
 export const MAX_TITLE_LENGTH = 100;
-
+export const MAX_PRICE = 100000;
+export const MIN_PRICE = 0;
