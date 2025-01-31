@@ -12,6 +12,7 @@ import { createCard } from './card.js';
 
 let map;
 let markerGroup;
+let mainMarker;
 
 const getMap = async () => {
   map = await L.map('map-canvas');
@@ -26,13 +27,19 @@ const getMap = async () => {
     attribution: MAP_ATTRIBUTION,
   }).addTo(map);
 
-  const mainMarker = L.marker(
+  mainMarker = L.marker(
     [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
     { icon: specialMarker, draggable: true }
   ).addTo(map);
+  console.log(mainMarker);
+
+  mainMarker.on('move', ({target}) => {
+    target.getLatLng();
+  });
 
   markerGroup = L.layerGroup().addTo(map);
 };
+
 
 const clearMarkerGroup = () => {
   markerGroup.clearLayers();

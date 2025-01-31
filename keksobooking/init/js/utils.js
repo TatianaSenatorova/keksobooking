@@ -4,7 +4,7 @@ import {
   DEBOUNCE_DELAY
 } from './constants.js';
 
-const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
+export const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
@@ -12,7 +12,7 @@ const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
   };
 };
 
-const findTemplate = (id) => {
+export const findTemplate = (id) => {
   const template = document.getElementById(id);
   if (!template) {
     throw new Error(`Template not found: #${id}`);
@@ -23,7 +23,7 @@ const findTemplate = (id) => {
   return template.content.firstElementChild;
 };
 
-const getPostfix = (value, words) =>{
+export const getPostfix = (value, words) =>{
   const number = Math.abs(value);
   if (number % 10 === 0 || number % 10 >= 5 || (number >= 10 && number < 20)) {
     return words[0];
@@ -35,7 +35,7 @@ const getPostfix = (value, words) =>{
   return words[2];
 };
 
-const getAllKeys = (object) =>{
+export const getAllKeys = (object) =>{
   let keys = [];
   for (const key in object) {
     if(object[key]) {
@@ -48,7 +48,7 @@ const getAllKeys = (object) =>{
   return keys;
 };
 
-const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
+export const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
   element.textContent = text;
   for (const key in objStyles) {
@@ -60,4 +60,3 @@ const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent =
   }, alertTime);
 };
 
-export { addTagError, debounce, findTemplate, getPostfix, getAllKeys };

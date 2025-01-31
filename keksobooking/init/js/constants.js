@@ -8,18 +8,18 @@ export const MAP_ATTRIBUTION =
 
 export const TokioCoordinates = {
   LATITUDE: 35.681729,
-  LONGITUDE: 139.753927,
+  LONGITUDE: 139.753927
 };
 
 export const specialMarker = L.icon({
-  iconUrl: '../img/main-pin.svg',
+  iconUrl: 'img/main-pin.svg',
   iconSize: [52],
   iconAnchor: [10, 38],
   popupAnchor: [-3, -30],
 });
 
 export const appartmentMarker = L.icon({
-  iconUrl: '../img/pin.svg',
+  iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [10, 38],
   popupAnchor: [-3, -30],
@@ -46,7 +46,7 @@ export const DEBOUNCE_DELAY = 500;
 export const ERROR_MESSAGE_MAP = 'Не удалось загрузить карту';
 export const ERROR_MESSAGE_DATA = 'Не удалось получить данные';
 
-export const ALERT_SHOW_TIME = 5000;
+export const ALERT_SHOW_TIME = 500;
 
 export const ErrorElementStyles = {
   position: 'absolute',
@@ -108,3 +108,6 @@ export const Accomodation = {
   house: 'Дом',
   bungalow: 'Бунгало',
 };
+
+export const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
+

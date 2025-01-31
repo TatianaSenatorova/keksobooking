@@ -2,7 +2,7 @@ import { disablePage } from './disable-page.js';
 import {
   getMap,
   renderMarkers
- } from './map.js';
+} from './map.js';
 import { getData } from './api.js';
 import { addTagError } from './utils.js';
 import {
@@ -11,6 +11,7 @@ import {
 } from './constants.js';
 import './map.js';
 import { setFilters} from './form-filters.js';
+import './form-advertisement.js';
 
 disablePage();
 
