@@ -12,6 +12,8 @@ import {
 import './map.js';
 import { setFilters} from './form-filters.js';
 import './form-advertisement.js';
+import './validate-form.js';
+
 
 disablePage();
 

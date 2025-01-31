@@ -353,10 +353,29 @@ fieldset {
   font-size: 14px;
 }
 
+
+
 .ad-form__element--wide {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
   max-width: 50%;
+}
+
+/* пришло добавить в разметку класс ad-form__element-validate для элементов формы, которые будут валидироваться, чтобы было куда добавить сообщение об ошибке */
+.ad-form__element-validate input {
+  margin-bottom: 2px;
+  }
+
+.ad-form__element-validate--error {
+  width: calc(100% - 20px);
+  background-color: #fd4d4b;
+  color:#ffffff;
+  font-size: 12px;
+  padding: 3px 5px;
+  margin-bottom: 0;
+  z-index: 2;
+  position: relative;
+ border-radius: 2px;
 }
 
 .ad-form__label {
