@@ -1,11 +1,20 @@
 import {
   adForm,
   avatarChooser,
-  avatarPreview
+  avatarPreview,
+  formType,
+  formPrice
 } from './dom-elements.js';
 import {
-  FILE_TYPES
+  FILE_TYPES,
+  Accomodation
 } from './constants.js';
+import {
+  changeSliderOptions,
+  updateSlider
+} from './slider.js';
+
+formPrice.placeholder = Accomodation[formType.value].minPrice;
 
 const uploadAvatar = () => {
   const file = avatarChooser.files[0];
@@ -21,4 +30,10 @@ adForm.addEventListener('change', ({target})=>{
   if(target === avatarChooser) {
     uploadAvatar();
   }
+});
+
+formType.addEventListener('change', ({target}) =>{
+  formPrice.placeholder = Accomodation[target.value].minPrice;
+  changeSliderOptions(target.value);
+  updateSlider(Accomodation[target.value].minPrice);
 });

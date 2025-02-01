@@ -348,7 +348,7 @@ fieldset {
 .ad-form__element {
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
-  min-height: 90px;
+  min-height: 110px;
 
   font-size: 14px;
 }
@@ -368,14 +368,15 @@ fieldset {
 
 .ad-form__element-validate--error {
   width: calc(100% - 20px);
+  margin-top: 5px;
   background-color: #fd4d4b;
   color:#ffffff;
-  font-size: 12px;
+  font-size: 10px;
   padding: 3px 5px;
-  margin-bottom: 0;
-  z-index: 2;
+   z-index: 2;
   position: relative;
  border-radius: 2px;
+ border: 1px solid #ffffff;
 }
 
 .ad-form__slider {
@@ -388,18 +389,19 @@ fieldset {
   height: 14px;
   width: 14px;
   top: -4px;
-  right: -6px;
-  border-radius: 9px;
-  background-color: rgb(4, 4, 46);
+  right: 0;
+  left: 10px;
+  border-radius: 50%;
+  background-color: rgb(204, 12, 12);
   box-shadow: unset;
   &::before {
     background-color: unset;
   }
 }
 
-/* .ad-form__slider .noUi-touch-area {
- box-shadow: unset;
-} */
+.ad-form__slider .noUi-connect  {
+ background: #ffaa99;
+}
 
 .ad-form__label {
   display: block;

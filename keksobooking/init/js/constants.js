@@ -102,11 +102,26 @@ export const TimeSentence = {
 };
 
 export const Accomodation = {
-  palace: 'Дворец',
-  flat: 'Квартира',
-  hotel: 'Отель',
-  house: 'Дом',
-  bungalow: 'Бунгало',
+  palace: {
+    lodging: 'Дворец',
+    minPrice: 10000
+  },
+  flat:  {
+    lodging: 'Квартира',
+    minPrice: 1000
+  },
+  hotel: {
+    lodging: 'Отель',
+    minPrice: 3000
+  },
+  house: {
+    lodging: 'Дом',
+    minPrice: 5000
+  },
+  bungalow: {
+    lodging: 'Бунгало',
+    minPrice: 0
+  }
 };
 
 export const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
@@ -114,12 +129,11 @@ export const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
 export const MIN_TITLE_LENGTH = 30;
 export const MAX_TITLE_LENGTH = 100;
 export const MAX_PRICE = 100000;
-export const MIN_PRICE = 0;
+export const MIN_PRICE = 10;
 
 export const sliderInitValues = {
-  MIN: 0,
   MAX: 100000,
-  START: 5000,
+  MIN: 0,
   STEP: 1,
   CONNECT: 'lower'
 };

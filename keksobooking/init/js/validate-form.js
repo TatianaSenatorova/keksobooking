@@ -1,15 +1,12 @@
 import {
   adForm,
   formTitle,
-  formPrice,
-  slider
+  formPrice
 } from './dom-elements.js';
 import {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
-  MAX_PRICE,
-  MIN_PRICE,
-  sliderInitValues
+  MAX_PRICE
 } from './constants.js';
 
 
@@ -29,24 +26,20 @@ const validateTitle = (value) =>
 const getTitleErrorMessage = () =>
   `Mинимальная длина заголовка ${MIN_TITLE_LENGTH}, максимальная ${MAX_TITLE_LENGTH}`;
 
-const validatePrice = (value) =>
-  value.length >= MIN_PRICE && value <= MAX_PRICE;
-const getPriceErrorMessage = () =>
-  `Цена от ${MIN_PRICE} руб. до ${MAX_PRICE} руб.`;
+const validatePrice = (value) => value !== 0 && value <= MAX_PRICE;
+const getPriceErrorMessage = () => `Заполните цену. Max цена ${MAX_PRICE} руб.`;
 
 pristine.addValidator(
   formTitle,
   validateTitle,
   getTitleErrorMessage
 );
+
 pristine.addValidator(
   formPrice,
   validatePrice,
   getPriceErrorMessage
 );
-
-
-
 
 
 const isValid = () => pristine.validate();
