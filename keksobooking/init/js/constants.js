@@ -91,12 +91,12 @@ export const CapacitySentence = {
   FIRST: '',
   SECOND: (dataKeyRooms) => getPostfix(dataKeyRooms, PostfixRooms),
   THIRD: 'для ',
-  FORTH: (dataKeyRooms) => getPostfix(dataKeyRooms, PostfixGuests),
+  FORTH: (dataKeyGuest) => getPostfix(dataKeyGuest, PostfixGuests),
 };
 
 export const TimeSentence = {
   FIRST: 'Заезд после ',
-  SECOND: () => '',
+  SECOND: () => ', ',
   THIRD: 'выезд до ',
   FORTH: () => ''
 };
@@ -116,8 +116,10 @@ export const MAX_TITLE_LENGTH = 100;
 export const MAX_PRICE = 100000;
 export const MIN_PRICE = 0;
 
-export const sliderValues = {
+export const sliderInitValues = {
   MIN: 0,
   MAX: 100000,
-  START: 0
+  START: 5000,
+  STEP: 1,
+  CONNECT: 'lower'
 };

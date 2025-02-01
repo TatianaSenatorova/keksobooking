@@ -379,20 +379,27 @@ fieldset {
 }
 
 .ad-form__slider {
-  height: 10px;
-}
-
-.ad-form__slider .noUi-connect {
-  background: #c0392b;
+  height: 6px;
+  width: calc(100% - 20px);
+  margin-top: -8px;
 }
 
 .ad-form__slider .noUi-handle {
-  height: 18px;
-  width: 18px;
-  top: -5px;
-  right: -9px;
+  height: 14px;
+  width: 14px;
+  top: -4px;
+  right: -6px;
   border-radius: 9px;
+  background-color: rgb(4, 4, 46);
+  box-shadow: unset;
+  &::before {
+    background-color: unset;
+  }
 }
+
+/* .ad-form__slider .noUi-touch-area {
+ box-shadow: unset;
+} */
 
 .ad-form__label {
   display: block;
