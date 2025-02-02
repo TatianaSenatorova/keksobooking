@@ -10,7 +10,7 @@ import {
 
 noUiSlider.create(slider, {
   range: {
-    min: Accomodation[formType.value].minPrice,
+    min: sliderInitValues.MIN,
     max: sliderInitValues.MAX,
   },
   start: Accomodation[formType.value].minPrice,
@@ -32,25 +32,13 @@ slider.noUiSlider.on('update', () => {
 
 export const updateSlider = (newPrice) =>  slider.noUiSlider.set(newPrice);
 
-formPrice.addEventListener('input', () => updateSlider(formPrice.value));
-
-/*Чтобы была возвожность удалить последню цифру клавишей backspace.
-А также удалить полностью выделенное значение в инпуте*/
-formPrice.addEventListener('keydown', ({code}) => {
-  if ((code === 'Backspace' || code === 'Delete') &&
-     (formPrice.value < 10 || window.getSelection().toString() === formPrice.value)) {
-    formPrice.value = 0;
-    updateSlider(formPrice.value);
-  }
-});
-
-export const changeSliderOptions = (type) => {
+export const changeSliderOptions = (minPrice) => {
   slider.noUiSlider.updateOptions({
     range: {
-      min: parseInt(Accomodation[type].minPrice, 10),
+      min: sliderInitValues.MIN,
       max: sliderInitValues.MAX,
     },
-    start: parseInt(Accomodation[type].minPrice, 10),
+    start: minPrice,
     step: sliderInitValues.STEP,
     connect: sliderInitValues.CONNECT,
     format: {

@@ -4,6 +4,7 @@ export const avatarChooser = adForm.querySelector('.ad-form-header__input');
 export const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
 export const formTitle = adForm.querySelector('#title');
 export const formPrice = adForm.querySelector('#price');
+// export const formPriceError = adForm.querySelector('#price');
 export const slider = adForm.querySelector('.ad-form__slider');
 export const formType = adForm.querySelector('#type');
 

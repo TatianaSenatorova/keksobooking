@@ -6,9 +6,18 @@ import {
 import {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
-  MAX_PRICE
+  MAX_PRICE,
+  Accomodation
 } from './constants.js';
+import{ minPriceToImport } from './form-advertisement.js';
+console.log(minPriceToImport());
 
+// let minPrice;
+
+// export const newIt  = (newMinPrice) => {
+//   minPrice = newMinPrice;
+// };
+// console.log(newIt());
 
 // пришло добавить в разметку класс ad-form__element-validate для элементов формы, которые будут валидироваться, чтобы было куда добавить сообщение об ошибке
 
@@ -26,8 +35,12 @@ const validateTitle = (value) =>
 const getTitleErrorMessage = () =>
   `Mинимальная длина заголовка ${MIN_TITLE_LENGTH}, максимальная ${MAX_TITLE_LENGTH}`;
 
-const validatePrice = (value) => value !== 0 && value <= MAX_PRICE;
-const getPriceErrorMessage = () => `Заполните цену. Max цена ${MAX_PRICE} руб.`;
+const validatePrice = (value) => {
+  console.log(value, minPriceToImport());
+ return value >= minPriceToImport() && value <= MAX_PRICE;
+
+};
+const getPriceErrorMessage = () => `Min цена ${minPriceToImport()}. Max цена ${MAX_PRICE} руб.`;
 
 pristine.addValidator(
   formTitle,
