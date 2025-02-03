@@ -8,6 +8,7 @@ import {
   Accomodation
 } from './constants.js';
 
+
 noUiSlider.create(slider, {
   range: {
     min: sliderInitValues.MIN,
@@ -27,10 +28,13 @@ noUiSlider.create(slider, {
 });
 
 slider.noUiSlider.on('update', () => {
+  console.log();
   formPrice.value = slider.noUiSlider.get();
 });
 
-export const updateSlider = (newPrice) =>  slider.noUiSlider.set(newPrice);
+export const updateSlider = (newPrice) => {
+  if(newPrice <= sliderInitValues.MAX){slider.noUiSlider.set(newPrice);}
+};
 
 export const changeSliderOptions = (minPrice) => {
   slider.noUiSlider.updateOptions({

@@ -1,16 +1,23 @@
 import {
   adForm,
   formTitle,
-  formPrice
+  formPrice,
+  formAddress,
+  roomsSelect,
+  capacitySelect
 } from './dom-elements.js';
 import {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
   MAX_PRICE,
-  Accomodation
+  Accomodation,
+  Capacity
 } from './constants.js';
-import{ minPriceToImport } from './form-advertisement.js';
-console.log(minPriceToImport());
+import{ closerMinPrice } from './form-advertisement.js';
+import {
+  closerLat,
+  closerLng
+} from './map.js';
 
 // let minPrice;
 
@@ -33,14 +40,20 @@ const pristine = new Pristine(
 const validateTitle = (value) =>
   value.length >= MIN_TITLE_LENGTH && value.length <= MAX_TITLE_LENGTH;
 const getTitleErrorMessage = () =>
-  `Mинимальная длина заголовка ${MIN_TITLE_LENGTH}, максимальная ${MAX_TITLE_LENGTH}`;
+  `Mинимальная длина заголовка ${MIN_TITLE_LENGTH} символов, максимальная ${MAX_TITLE_LENGTH}`;
 
-const validatePrice = (value) => {
-  console.log(value, minPriceToImport());
- return value >= minPriceToImport() && value <= MAX_PRICE;
+const validatePrice = (value) => value >= closerMinPrice() && value <= MAX_PRICE;
+const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleString('ru')}. Max цена ${MAX_PRICE.toLocaleString('ru')} руб.`;
 
-};
-const getPriceErrorMessage = () => `Min цена ${minPriceToImport()}. Max цена ${MAX_PRICE} руб.`;
+const validateAddress = (value) => value === `lat: ${closerLat()}, lng: ${closerLng()}`;
+const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
+
+const validateRooms = (value) => {
+  console.log(value);
+  console.log(Capacity.findIndex((item) => item.ROOM_OPTION === parseInt(value, 10)));
+  return Capacity.indexOf(Capacity.ROOM_OPTION === value)};
+const getRoomsErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
+
 
 pristine.addValidator(
   formTitle,
@@ -54,6 +67,17 @@ pristine.addValidator(
   getPriceErrorMessage
 );
 
+pristine.addValidator(
+  formAddress,
+  validateAddress,
+  getAddressErrorMessage
+);
+
+pristine.addValidator(
+  roomsSelect,
+  validateRooms,
+  getRoomsErrorMessage
+);
 
 const isValid = () => pristine.validate();
 const resetValidation = () => pristine.reset();

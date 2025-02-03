@@ -13,7 +13,7 @@ export const TokioCoordinates = {
 
 export const specialMarker = L.icon({
   iconUrl: 'img/main-pin.svg',
-  iconSize: [52],
+  iconSize: [52, 52],
   iconAnchor: [10, 38],
   popupAnchor: [-3, -30],
 });
@@ -137,3 +137,22 @@ export const sliderInitValues = {
   STEP: 1,
   CONNECT: 'lower'
 };
+
+export const Capacity = [
+  {
+    ROOM_OPTION: 1,
+    GUESTS_OPTION: 1
+  },
+  {
+    ROOM_OPTION: 2,
+    GUESTS_OPTION: [1, 2]
+  },
+  {
+    ROOM_OPTION: 3,
+    GUESTS_OPTION: [1, 2, 3]
+  },
+  {
+    ROOM_OPTION: 100,
+    GUESTS_OPTION: 0
+  }
+];
