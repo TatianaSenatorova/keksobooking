@@ -52,12 +52,12 @@ const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleStri
 const validateAddress = (value) => value === `lat: ${closerLat()}, lng: ${closerLng()}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
 
-const validateAccomodation = (value, arrayToCheck, chosenOption, optionToCheck) => {
+const validateAccomodation = (value, linkedSelect, arrayToCheck, chosenOption, optionToCheck) => {
   capacityCurrentIndex  = arrayToCheck.findIndex((option) => option[chosenOption] === parseInt(value, 10));
   alowed = arrayToCheck[capacityCurrentIndex][optionToCheck];
   console.log(parseInt(value, 10), alowed);
-  console.log(alowed.includes(parseInt(value, 10)));
-  return alowed.includes(parseInt(value, 10));};
+  console.log(alowed.includes(parseInt(linkedSelect, 10)));
+  return alowed.includes(parseInt(linkedSelect, 10));};
 
 
 const getGuestsErrorMessage = () => {
@@ -73,14 +73,14 @@ const validateGuests = (value) => {
   const arrayToCheck = AccomodationOptions.GUESTS;
   const chosenOption = 'GUESTS_OPTION';
   const optionToCheck = 'ROOMS';
-  validateAccomodation(value, arrayToCheck, chosenOption, optionToCheck);
+  validateAccomodation(value, roomsSelect.value, arrayToCheck, chosenOption, optionToCheck);
 };
 
 const validateRooms = (value) => {
   const arrayToCheck = AccomodationOptions.ROOMS;
   const chosenOption = 'ROOM_OPTION';
   const optionToCheck = 'GUESTS';
-  validateAccomodation(value, arrayToCheck, chosenOption, optionToCheck);
+  validateAccomodation(value, guestsSelect.value, arrayToCheck, chosenOption, optionToCheck);
 };
 
 const getRoomsErrorMessage = () => {
