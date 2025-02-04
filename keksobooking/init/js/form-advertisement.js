@@ -7,7 +7,13 @@ import {
   formPriceParent,
   formAddress,
   formCheckin,
-  formCheckout
+  formCheckout,
+  guestsSelect,
+  roomsSelect,
+  roomsSelectParent,
+  guestsSelectParent,
+  photoChooser,
+  photoPreview
 } from './dom-elements.js';
 import {
   FILE_TYPES,
@@ -17,7 +23,6 @@ import {
   changeSliderOptions,
   updateSlider
 } from './slider.js';
-
 
 formPrice.placeholder = Accomodation[formType.value].minPrice;
 let currentMinPrice = Accomodation[formType.value].minPrice;
@@ -31,13 +36,16 @@ const getMinPrice = () => function (){
 
 export const closerMinPrice = getMinPrice();
 
-const uploadAvatar = () => {
-  const file = avatarChooser.files[0];
+const uploadPhoto = (fileInput, parentForPhotos) => {
+  const file = fileInput.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-  if (matches) {
+  if (matches && fileInput === avatarChooser) {
     const url = URL.createObjectURL(file);
-    avatarPreview.src = url;
+    parentForPhotos.src = url;
+  } else if (matches && fileInput === photoChooser){
+    const url = URL.createObjectURL(file);
+    photoPreview.insertAdjacentHTML('beforebegin', `<img src=${url} width='70' height='70'>`);
   }
 };
 
@@ -46,6 +54,11 @@ export const checkIsError = (parent) => {
     parent.querySelector('.ad-form__element-validate--error').
       style.display = 'none';
   }
+};
+
+export const checkIsErrorLinkSelect = (target) =>{
+  if(target === guestsSelect) {checkIsError(roomsSelectParent);}
+  else {checkIsError(guestsSelectParent);}
 };
 
 const changeMinPrice = (target) => {
@@ -71,7 +84,10 @@ const changeTime = (target) =>{
 adForm.addEventListener('change', ({target})=>{
   switch (target) {
     case avatarChooser:
-      uploadAvatar();
+      uploadPhoto(avatarChooser, avatarPreview);
+      break;
+    case photoChooser:
+      uploadPhoto(photoChooser, photoPreview);
       break;
     case formType:
       changeMinPrice(target);
@@ -79,6 +95,10 @@ adForm.addEventListener('change', ({target})=>{
     case formCheckin:
     case formCheckout:
       changeTime(target);
+      break;
+    case roomsSelect:
+    case guestsSelect:
+      checkIsErrorLinkSelect(target);
       break;
     default:
       break;

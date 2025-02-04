@@ -4,29 +4,33 @@ import {
   formPrice,
   formAddress,
   roomsSelect,
-  capacitySelect
+  guestsSelect,
+  guestsSelectParent,
+  roomsSelectParent
 } from './dom-elements.js';
 import {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
   MAX_PRICE,
-  Accomodation,
-  Capacity
+  PostfixGuests,
+  PostfixRoomsIn,
+  // RoomOptions,
+  // GuestsOptions,
+  AccomodationOptions
 } from './constants.js';
 import{ closerMinPrice } from './form-advertisement.js';
 import {
   closerLat,
   closerLng
 } from './map.js';
+import {
+  getPostfix
+} from './utils.js';
 
-// let minPrice;
 
-// export const newIt  = (newMinPrice) => {
-//   minPrice = newMinPrice;
-// };
-// console.log(newIt());
-
-// пришло добавить в разметку класс ad-form__element-validate для элементов формы, которые будут валидироваться, чтобы было куда добавить сообщение об ошибке
+let capacityCurrentIndex;
+let alowed = [];
+// let alowedRooms = [];
 
 const pristine = new Pristine(
   adForm,
@@ -48,12 +52,46 @@ const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleStri
 const validateAddress = (value) => value === `lat: ${closerLat()}, lng: ${closerLng()}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
 
-const validateRooms = (value) => {
-  console.log(value);
-  console.log(Capacity.findIndex((item) => item.ROOM_OPTION === parseInt(value, 10)));
-  return Capacity.indexOf(Capacity.ROOM_OPTION === value)};
-const getRoomsErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
+const validateAccomodation = (value, arrayToCheck, chosenOption, optionToCheck) => {
+  capacityCurrentIndex  = arrayToCheck.findIndex((option) => option[chosenOption] === parseInt(value, 10));
+  alowed = arrayToCheck[capacityCurrentIndex][optionToCheck];
+  console.log(parseInt(value, 10), alowed);
+  console.log(alowed.includes(parseInt(value, 10)));
+  return alowed.includes(parseInt(value, 10));};
 
+
+const getGuestsErrorMessage = () => {
+  let message = 'Возможно размещение в ';
+  for(let i = 0; i < alowed.length; i++) {
+    message += `${alowed[i]} , `;
+  }
+  message = message.slice(0, -2) + getPostfix(alowed.pop(), PostfixRoomsIn);
+  return message;
+};
+
+const validateGuests = (value) => {
+  const arrayToCheck = AccomodationOptions.GUESTS;
+  const chosenOption = 'GUESTS_OPTION';
+  const optionToCheck = 'ROOMS';
+  validateAccomodation(value, arrayToCheck, chosenOption, optionToCheck);
+};
+
+const validateRooms = (value) => {
+  const arrayToCheck = AccomodationOptions.ROOMS;
+  const chosenOption = 'ROOM_OPTION';
+  const optionToCheck = 'GUESTS';
+  validateAccomodation(value, arrayToCheck, chosenOption, optionToCheck);
+};
+
+const getRoomsErrorMessage = () => {
+  let message = 'Возможно размещение ';
+  for(let i = 0; i < alowed.length; i++) {
+    message += `${alowed[i]} , `;
+  }
+  message = message.slice(0, -2) + getPostfix(alowed.pop(), PostfixGuests);
+  return message;
+
+};
 
 pristine.addValidator(
   formTitle,
@@ -77,6 +115,12 @@ pristine.addValidator(
   roomsSelect,
   validateRooms,
   getRoomsErrorMessage
+);
+
+pristine.addValidator(
+  guestsSelect,
+  validateGuests,
+  getGuestsErrorMessage
 );
 
 const isValid = () => pristine.validate();

@@ -12,8 +12,11 @@ export const formAddressParent = formAddress.closest('.ad-form__element-validate
 export const formCheckin = adForm.querySelector('#timein');
 export const formCheckout = adForm.querySelector('#timeout');
 export const roomsSelect = adForm.querySelector('#room_number');
-export const capacitySelect = adForm.querySelector('#capacity');
-
+export const roomsSelectParent = roomsSelect.closest('.ad-form__element-validate');
+export const guestsSelect = adForm.querySelector('#capacity');
+export const guestsSelectParent = guestsSelect.closest('.ad-form__element-validate');
+export const photoChooser = adForm.querySelector('.ad-form__input');
+export const photoPreview = adForm.querySelector('.ad-form__photo');
 
 export const filtersForm = document.querySelector('.map__filters');
 export const mapFilterSelects = filtersForm.querySelectorAll('.map__filter');
