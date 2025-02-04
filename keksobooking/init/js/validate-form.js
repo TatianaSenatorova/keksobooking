@@ -5,8 +5,6 @@ import {
   formAddress,
   roomsSelect,
   guestsSelect,
-  guestsSelectParent,
-  roomsSelectParent
 } from './dom-elements.js';
 import {
   MIN_TITLE_LENGTH,
@@ -14,8 +12,6 @@ import {
   MAX_PRICE,
   PostfixGuests,
   PostfixRoomsIn,
-  // RoomOptions,
-  // GuestsOptions,
   AccomodationOptions
 } from './constants.js';
 import{ closerMinPrice } from './form-advertisement.js';
@@ -30,7 +26,6 @@ import {
 
 let capacityCurrentIndex;
 let alowed = [];
-// let alowedRooms = [];
 
 const pristine = new Pristine(
   adForm,
@@ -42,20 +37,22 @@ const pristine = new Pristine(
 );
 
 const validateTitle = (value) =>
-  value.length >= MIN_TITLE_LENGTH && value.length <= MAX_TITLE_LENGTH;
+  value.length >= MIN_TITLE_LENGTH &&
+value.length <= MAX_TITLE_LENGTH;
 const getTitleErrorMessage = () =>
   `Mинимальная длина заголовка ${MIN_TITLE_LENGTH} символов, максимальная ${MAX_TITLE_LENGTH}`;
 
-const validatePrice = (value) => value >= closerMinPrice() && value <= MAX_PRICE;
+const validatePrice = (value) => value >= closerMinPrice() &&
+value <= MAX_PRICE;
 const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleString('ru')}. Max цена ${MAX_PRICE.toLocaleString('ru')} руб.`;
 
 const validateAddress = (value) => value === `lat: ${closerLat()}, lng: ${closerLng()}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
 
 const validateAccomodation = (value, linkedSelect, arrayToCheck, chosenOption, optionToCheck) => {
-  capacityCurrentIndex  = arrayToCheck.findIndex((option) => option[chosenOption] === parseInt(value, 10));
+  capacityCurrentIndex  = arrayToCheck.findIndex((option) => option[chosenOption] ===
+   parseInt(value, 10));
   alowed = arrayToCheck[capacityCurrentIndex][optionToCheck];
-  console.log(parseInt(value, 10), alowed);
   console.log(alowed.includes(parseInt(linkedSelect, 10)));
   return alowed.includes(parseInt(linkedSelect, 10));};
 
