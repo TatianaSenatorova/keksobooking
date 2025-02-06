@@ -106,13 +106,7 @@ adForm.addEventListener('change', ({target})=>{
 });
 
 formPrice.addEventListener('input', () => {
-  updateSlider(formPrice.value);});
-
-/*Чтобы была возвожность удалить первую цифру клавишей backspace. А также удалить полностью выделенное значение в инпуте*/
-formPrice.addEventListener('keydown', ({code}) => {
-  if ((code === 'Backspace' || code === 'Delete') &&
-     (formPrice.value < 10 || window.getSelection().toString() === formPrice.value)) {
+  if(!formPrice.value.toString().length){
     formPrice.value = 0;
-    updateSlider(formPrice.value);
   }
-});
+  updateSlider(formPrice.value);});
