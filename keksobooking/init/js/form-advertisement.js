@@ -45,7 +45,7 @@ const uploadPhoto = (fileInput, parentForPhotos) => {
     parentForPhotos.src = url;
   } else if (matches && fileInput === photoChooser){
     const url = URL.createObjectURL(file);
-    photoPreview.insertAdjacentHTML('beforebegin', `<img src=${url} width='70' height='70'>`);
+    photoPreview.insertAdjacentHTML('beforeend', `<img src=${url} width='70' height='70'>`);
   }
 };
 
@@ -87,6 +87,7 @@ adForm.addEventListener('change', ({target})=>{
       uploadPhoto(avatarChooser, avatarPreview);
       break;
     case photoChooser:
+      console.log(photoPreview);
       uploadPhoto(photoChooser, photoPreview);
       break;
     case formType:

@@ -24,14 +24,19 @@ export const findTemplate = (id) => {
 };
 
 export const getPostfix = (value, words) =>{
-  const number = Math.abs(value.toString().slice(-2));
+  console.log(value, words);
+  if((value.toString()).length > 2) {
+    value = (value.toString()).slice(-2);
+  }
+  const number = Math.abs(value);
+  console.log(number);
   if (!Number.isInteger(number)) {
     return '';
   }
   switch (number) {
-    case 0:
     case 1:
       return words[1];
+    case 0:
     case 2:
     case 3:
     case 4:

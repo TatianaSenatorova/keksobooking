@@ -52,16 +52,18 @@ const getAddressErrorMessage = () => 'Переместите красную ме
 
 const validateAccomodation = (value, linkedSelectValue, arrayToCheck, chosenOption, linkedOption) => {
   capacityCurrentIndex  = arrayToCheck.findIndex((option) => option[chosenOption] ===
-   parseInt(value, 10));
-  allowed = arrayToCheck[capacityCurrentIndex][linkedOption];
-  return allowed.includes(parseInt(linkedSelectValue, 10));};
+   value);
+  allowed = (arrayToCheck[capacityCurrentIndex][linkedOption]).slice();
+  return allowed.includes(linkedSelectValue);};
 
 const getAccomodationErrorMessage = (checkingOption, postfixesArray) => {
   let message = AccomodationSentences[checkingOption];
   for(let i = 0; i < allowed.length; i++) {
     message += `${allowed[i]} , `;
   }
-  message = message.slice(0, -2) + getPostfix(allowed.pop(), postfixesArray);
+  const lastNumber = allowed.pop();
+  message = message.replace(/,\s*$/, '') + getPostfix(lastNumber, postfixesArray);
+  console.log(message);
   return message;
 };
 

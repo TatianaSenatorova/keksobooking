@@ -297,8 +297,6 @@ fieldset {
           align-items: center;
 
   margin-right: 10px;
-  padding: 0 15px;
-
   width: 70px;
   height: 70px;
 
@@ -565,11 +563,11 @@ fieldset {
 }
 
 .ad-form__photo-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: flex-start;
+  row-gap: 5px;
+  height: 100%;
 }
 
 .ad-form__upload {
@@ -577,7 +575,6 @@ fieldset {
   display: -ms-flexbox;
   display: flex;
   margin-right: 10px;
-
   width: 150px;
   min-height: 70px;
 }
@@ -619,12 +616,19 @@ fieldset {
 .ad-form__photo {
   margin-right: 10px;
   margin-bottom: 10px;
-
-  width: 70px;
-  height: 70px;
-
+ grid-template-rows: 1 / 2;
+display: flex;
+gap: 3px;
+flex-wrap: wrap;
+align-items: flex-start;
+  height: 100%;
+  align-content: flex-start;
   background-color: #e4e4de;
   border-radius: 5px;
+}
+
+.ad-form__photo img {
+  object-fit: cover;
 }
 
 .ad-form__element--submit {
