@@ -8,6 +8,8 @@ import {
   Accomodation
 } from './constants.js';
 
+let isMoreThenMaxPrice = false;
+
 
 noUiSlider.create(slider, {
   range: {
@@ -28,12 +30,18 @@ noUiSlider.create(slider, {
 });
 
 slider.noUiSlider.on('update', () => {
-  console.log();
-  formPrice.value = slider.noUiSlider.get();
+  if(!isMoreThenMaxPrice) {
+    formPrice.value = slider.noUiSlider.get();
+  }
 });
 
 export const updateSlider = (newPrice) => {
-  if(newPrice <= sliderInitValues.MAX){slider.noUiSlider.set(newPrice);}
+  isMoreThenMaxPrice = newPrice > sliderInitValues.MAX;
+  if(!isMoreThenMaxPrice){
+    slider.noUiSlider.set(newPrice);
+  } else {
+    slider.noUiSlider.set(sliderInitValues.MAX);
+  }
 };
 
 export const changeSliderOptions = (minPrice) => {

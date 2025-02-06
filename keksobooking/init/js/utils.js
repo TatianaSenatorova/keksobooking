@@ -29,6 +29,7 @@ export const getPostfix = (value, words) =>{
     return '';
   }
   switch (number) {
+    case 0:
     case 1:
       return words[1];
     case 2:

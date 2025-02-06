@@ -139,43 +139,6 @@ export const sliderInitValues = {
   CONNECT: 'lower'
 };
 
-// export const Options = [
-//   {
-//     ROOM_OPTION: 1,
-//     GUESTS: [1]
-//   },
-//   {
-//     ROOM_OPTION: 2,
-//     GUESTS: [1, 2]
-//   },
-//   {
-//     ROOM_OPTION: 3,
-//     GUESTS: [1, 2, 3]
-//   },
-//   {
-//     ROOM_OPTION: 100,
-//     GUESTS: [0]
-//   }
-// ];
-
-// export const GuestsOptions = [
-//   {
-//     GUESTS_OPTION: 1,
-//     ROOMS: [1, 2, 3],
-//   },
-//   {
-//     GUESTS_OPTION: 2,
-//     ROOMS: [2, 3],
-//   },
-//   {
-//     GUESTS_OPTION: 3,
-//     ROOMS: [3],
-//   },
-//   {
-//     GUESTS_OPTION: 0,
-//     ROOMS: [100],
-//   }
-// ];
 export const AccomodationOptions = {
   ROOMS:  [
     {
@@ -213,6 +176,11 @@ export const AccomodationOptions = {
       ROOMS: [100],
     }
   ]
+};
+
+export const AccomodationSentences = {
+  ROOMS: 'Возможно размещение ',
+ GUESTS: 'Возможно размещение  в '
 };
 
 

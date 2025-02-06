@@ -12,7 +12,8 @@ import {
   MAX_PRICE,
   PostfixGuests,
   PostfixRoomsIn,
-  AccomodationOptions
+  AccomodationOptions,
+  AccomodationSentences
 } from './constants.js';
 import{ closerMinPrice } from './form-advertisement.js';
 import {
@@ -25,7 +26,7 @@ import {
 
 
 let capacityCurrentIndex;
-let alowed = [];
+let allowed = [];
 
 const pristine = new Pristine(
   adForm,
@@ -44,51 +45,31 @@ const getTitleErrorMessage = () =>
 
 const validatePrice = (value) => value >= closerMinPrice() &&
 value <= MAX_PRICE;
-const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleString('ru')}. Max цена ${MAX_PRICE.toLocaleString('ru')} руб.`;
+const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleString()}. Max цена ${MAX_PRICE.toLocaleString()} руб.`;
 
 const validateAddress = (value) => value === `lat: ${closerLat()}, lng: ${closerLng()}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
 
-const validateAccomodation = (value, linkedSelect, arrayToCheck, chosenOption, optionToCheck) => {
+const validateAccomodation = (value, linkedSelectValue, arrayToCheck, chosenOption, linkedOption) => {
   capacityCurrentIndex  = arrayToCheck.findIndex((option) => option[chosenOption] ===
    parseInt(value, 10));
-  alowed = arrayToCheck[capacityCurrentIndex][optionToCheck];
-  console.log(alowed.includes(parseInt(linkedSelect, 10)));
-  return alowed.includes(parseInt(linkedSelect, 10));};
+  allowed = arrayToCheck[capacityCurrentIndex][linkedOption];
+  return allowed.includes(parseInt(linkedSelectValue, 10));};
 
-
-const getGuestsErrorMessage = () => {
-  let message = 'Возможно размещение в ';
-  for(let i = 0; i < alowed.length; i++) {
-    message += `${alowed[i]} , `;
+const getAccomodationErrorMessage = (checkingOption, postfixesArray) => {
+  let message = AccomodationSentences[checkingOption];
+  for(let i = 0; i < allowed.length; i++) {
+    message += `${allowed[i]} , `;
   }
-  message = message.slice(0, -2) + getPostfix(alowed.pop(), PostfixRoomsIn);
+  message = message.slice(0, -2) + getPostfix(allowed.pop(), postfixesArray);
   return message;
 };
 
-const validateGuests = (value) => {
-  const arrayToCheck = AccomodationOptions.GUESTS;
-  const chosenOption = 'GUESTS_OPTION';
-  const optionToCheck = 'ROOMS';
-  validateAccomodation(value, roomsSelect.value, arrayToCheck, chosenOption, optionToCheck);
-};
+const validateGuests = (value) => validateAccomodation(value, roomsSelect.value, AccomodationOptions.GUESTS, 'GUESTS_OPTION', 'ROOMS');
+const getGuestsErrorMessage = () => getAccomodationErrorMessage('GUESTS', PostfixRoomsIn);
 
-const validateRooms = (value) => {
-  const arrayToCheck = AccomodationOptions.ROOMS;
-  const chosenOption = 'ROOM_OPTION';
-  const optionToCheck = 'GUESTS';
-  validateAccomodation(value, guestsSelect.value, arrayToCheck, chosenOption, optionToCheck);
-};
-
-const getRoomsErrorMessage = () => {
-  let message = 'Возможно размещение ';
-  for(let i = 0; i < alowed.length; i++) {
-    message += `${alowed[i]} , `;
-  }
-  message = message.slice(0, -2) + getPostfix(alowed.pop(), PostfixGuests);
-  return message;
-
-};
+const validateRooms = (value) => validateAccomodation(value, guestsSelect.value, AccomodationOptions.ROOMS, 'ROOM_OPTION', 'GUESTS');
+const getRoomsErrorMessage = () => getAccomodationErrorMessage('ROOMS', PostfixGuests);
 
 pristine.addValidator(
   formTitle,

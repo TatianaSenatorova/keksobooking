@@ -106,7 +106,7 @@ adForm.addEventListener('change', ({target})=>{
 });
 
 formPrice.addEventListener('input', () => {
-  if(!formPrice.value.toString().length){
+  if(!formPrice.value.length){
     formPrice.value = 0;
   }
-  updateSlider(formPrice.value);});
+  updateSlider(parseInt(formPrice.value, 10));});
