@@ -24,15 +24,21 @@ export const findTemplate = (id) => {
 };
 
 export const getPostfix = (value, words) =>{
-  const number = Math.abs(value);
-  if (number % 10 === 0 || number % 10 >= 5 || (number >= 10 && number < 20)) {
-    return words[0];
-  } else if (!number){
+  const number = Math.abs(value.toString().slice(-2));
+  if (!Number.isInteger(number)) {
     return '';
-  }else if (number % 10 === 1) {
-    return words[1];
   }
-  return words[2];
+  switch (number) {
+    case 1:
+      return words[1];
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      return words[2];
+    default:
+      return words[0];
+  }
 };
 
 export const getAllKeys = (object) =>{

@@ -19,6 +19,7 @@ export const photoChooser = adForm.querySelector('.ad-form__input');
 export const photoPreview = adForm.querySelector('.ad-form__photo');
 
 export const filtersForm = document.querySelector('.map__filters');
+export const filtersFeatures = document.querySelector('.map__features');
 export const mapFilterSelects = filtersForm.querySelectorAll('.map__filter');
 export const typeSelect = filtersForm.querySelector('#housing-type');
 export const priceSelect = filtersForm.querySelector('#housing-price');

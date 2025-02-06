@@ -2,7 +2,7 @@ import { getPostfix } from './utils.js';
 
 export const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 export const MAX_MAP_ZOOM = 19;
-export const CURRENT_ZOOM = 14;
+export const CURRENT_ZOOM = 13;
 export const MAP_ATTRIBUTION =
   '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
