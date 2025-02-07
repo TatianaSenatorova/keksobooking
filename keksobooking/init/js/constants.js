@@ -14,14 +14,14 @@ export const TokioCoordinates = {
 export const specialMarker = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],
-  iconAnchor: [10, 38],
+  iconAnchor: [26, 52],
   popupAnchor: [-3, -30],
 });
 
 export const appartmentMarker = L.icon({
   iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
-  iconAnchor: [10, 38],
+  iconAnchor: [20, 40],
   popupAnchor: [-3, -30],
 });
 

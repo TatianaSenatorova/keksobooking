@@ -39,15 +39,15 @@ const updateMainMarker = (lat, lng) =>{
 const getMap = async () => {
   map = await L.map('map-canvas');
 
-  map.setView(
-    [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
-    CURRENT_ZOOM
-  );
-
   L.tileLayer(TILE_LAYER, {
     maxZoom: MAX_MAP_ZOOM,
     attribution: MAP_ATTRIBUTION,
   }).addTo(map);
+
+  map.setView(
+    [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
+    CURRENT_ZOOM
+  );
 
   mainMarker = L.marker(
     [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
@@ -57,7 +57,7 @@ const getMap = async () => {
   updateMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
   getLatLngMainMarker(closerLat(), closerLng());
 
-  mainMarker.on('move', () => {
+  mainMarker.on('moveend', () => {
     updateMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
     getLatLngMainMarker(closerLat(), closerLng());
     checkIsError(formAddressParent);
