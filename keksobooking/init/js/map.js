@@ -21,6 +21,21 @@ let mainMarker;
 let currentLat;
 let currentLng;
 
+const getLat = () => function (){
+  return currentLat;
+};
+export const closerLat = getLat();
+
+const getLng = () => function (){
+  return currentLng;
+};
+export const closerLng = getLng();
+
+const updateMainMarker = (lat, lng) =>{
+  currentLat = lat.toFixed(5);
+  currentLng = lng.toFixed(5);
+};
+
 const getMap = async () => {
   map = await L.map('map-canvas');
 
@@ -38,14 +53,13 @@ const getMap = async () => {
     [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
     { icon: specialMarker, draggable: true }
   ).addTo(map);
-  getLatLngMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
-  currentLat = mainMarker._latlng.lat;
-  currentLng = mainMarker._latlng.lng;
+
+  updateMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
+  getLatLngMainMarker(closerLat(), closerLng());
 
   mainMarker.on('move', () => {
-    getLatLngMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
-    currentLat = mainMarker._latlng.lat.toFixed(5);
-    currentLng = mainMarker._latlng.lng.toFixed(5);
+    updateMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
+    getLatLngMainMarker(closerLat(), closerLng());
     checkIsError(formAddressParent);
   });
 
@@ -67,15 +81,5 @@ const renderMarkers = (appartmentsArray) => {
     marker.bindPopup(() => createCard(appartment));
   });
 };
-
-const getLat = () => function (){
-  return currentLat;
-};
-export const closerLat = getLat();
-
-const getLng = () => function (){
-  return currentLng;
-};
-export const closerLng = getLng();
 
 export { getMap, renderMarkers };

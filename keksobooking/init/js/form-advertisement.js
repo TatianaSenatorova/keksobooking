@@ -13,21 +13,30 @@ import {
   roomsSelectParent,
   guestsSelectParent,
   photoChooser,
-  photoPreview
+  photoPreview,
+  submitButton
 } from './dom-elements.js';
 import {
   FILE_TYPES,
-  Accomodation
+  Accomodation,
+  IdTemplatesPopup
 } from './constants.js';
 import {
   changeSliderOptions,
-  updateSlider
+  updateSlider,
+  resetSlider
 } from './slider.js';
+import {
+  isValid,
+  resetValidation
+} from './validate-form.js';
+import { sendData } from './api.js';
+import { showPopup } from './utils.js';
 
 formPrice.placeholder = Accomodation[formType.value].minPrice;
 let currentMinPrice = Accomodation[formType.value].minPrice;
 export const getLatLngMainMarker = (lat, lng) => {
-  formAddress.value = `lat: ${lat.toFixed(5)}, lng: ${lng.toFixed(5)}`;
+  formAddress.value = `lat: ${lat}, lng: ${lng}`;
 };
 
 const getMinPrice = () => function (){
@@ -45,7 +54,7 @@ const uploadPhoto = (fileInput, parentForPhotos) => {
     parentForPhotos.src = url;
   } else if (matches && fileInput === photoChooser){
     const url = URL.createObjectURL(file);
-    photoPreview.insertAdjacentHTML('beforeend', `<img src=${url} width='70' height='70'>`);
+    parentForPhotos.insertAdjacentHTML('beforeend', `<img src=${url} width='70' height='70'>`);
   }
 };
 
@@ -87,7 +96,6 @@ adForm.addEventListener('change', ({target})=>{
       uploadPhoto(avatarChooser, avatarPreview);
       break;
     case photoChooser:
-      console.log(photoPreview);
       uploadPhoto(photoChooser, photoPreview);
       break;
     case formType:
@@ -111,3 +119,39 @@ formPrice.addEventListener('input', () => {
     formPrice.value = 0;
   }
   updateSlider(parseInt(formPrice.value, 10));});
+
+const blockSubmitButton = (isBlocked = true) => {
+  submitButton.disabled = isBlocked;
+};
+
+const resetForm = () => {
+  adForm.reset();
+};
+
+const removePhotos = () => {
+  avatarPreview.src = '';
+  photoPreview.innerHTML = '';
+};
+
+const clearForm = () => {
+  resetValidation();
+  resetForm();
+  resetSlider();
+  removePhotos();
+};
+
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  if (isValid()) {
+    blockSubmitButton();
+    sendData(new FormData(evt.target))
+      .then(() => {
+        clearForm();
+        showPopup(IdTemplatesPopup.SUCCESS);
+      })
+      .catch(() => showPopup(IdTemplatesPopup.ERROR))
+      .finally(() => blockSubmitButton(false));
+  }
+});
+
+

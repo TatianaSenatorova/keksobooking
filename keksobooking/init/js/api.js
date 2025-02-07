@@ -9,8 +9,7 @@ const load = async (route, method = Method.GET, body = null) => {
   return response.ok ? await response.json() : Promise.reject();
 };
 
-const getData = async () => await load(Route.GET_DATA);
+export const getData = async () => await load(Route.GET_DATA);
 
-const sendData = async (body) => await load(Route.SEND_DATA, Method.POST, body);
+export const sendData = async (body) => await load(Route.SEND_DATA, Method.POST, body);
 
-export { getData, sendData };

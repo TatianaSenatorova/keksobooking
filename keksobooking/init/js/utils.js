@@ -3,6 +3,7 @@ import {
   ErrorElementStyles,
   DEBOUNCE_DELAY
 } from './constants.js';
+import { body } from './dom-elements.js';
 
 export const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
   let timeoutId;
@@ -24,12 +25,10 @@ export const findTemplate = (id) => {
 };
 
 export const getPostfix = (value, words) =>{
-  console.log(value, words);
   if((value.toString()).length > 2) {
     value = (value.toString()).slice(-2);
   }
   const number = Math.abs(value);
-  console.log(number);
   if (!Number.isInteger(number)) {
     return '';
   }
@@ -70,5 +69,24 @@ export const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', p
   setTimeout(() => {
     element.remove();
   }, alertTime);
+};
+
+const closePopup = (popupElement) => {
+  popupElement.remove();
+};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export const showPopup = (templateId) => {
+  const template = findTemplate(templateId);
+  const popupElement = template.cloneNode(true);
+  body.append(popupElement);
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      closePopup(popupElement);
+    }});
+  popupElement.addEventListener('click', () => {
+    closePopup(popupElement);
+  });
 };
 

@@ -1,3 +1,4 @@
+export const body = document.querySelector('body');
 export const adForm = document.querySelector('.ad-form');
 export const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
 export const avatarChooser = adForm.querySelector('.ad-form-header__input');
@@ -17,6 +18,7 @@ export const guestsSelect = adForm.querySelector('#capacity');
 export const guestsSelectParent = guestsSelect.closest('.ad-form__element-validate');
 export const photoChooser = adForm.querySelector('.ad-form__input');
 export const photoPreview = adForm.querySelector('.ad-form__photo');
+export const submitButton = adForm.querySelector('.ad-form__submit');
 
 export const filtersForm = document.querySelector('.map__filters');
 export const filtersFeatures = document.querySelector('.map__features');

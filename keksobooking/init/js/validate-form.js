@@ -63,7 +63,6 @@ const getAccomodationErrorMessage = (checkingOption, postfixesArray) => {
   }
   const lastNumber = allowed.pop();
   message = message.replace(/,\s*$/, '') + getPostfix(lastNumber, postfixesArray);
-  console.log(message);
   return message;
 };
 

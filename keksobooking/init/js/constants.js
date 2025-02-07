@@ -183,4 +183,8 @@ export const AccomodationSentences = {
   GUESTS: 'Возможно размещение  в '
 };
 
+export const IdTemplatesPopup = {
+  ERROR: 'error',
+  SUCCESS: 'success'
+};
 
