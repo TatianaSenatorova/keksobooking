@@ -5,6 +5,8 @@ import {
 } from './constants.js';
 import { body } from './dom-elements.js';
 
+let popupElement;
+
 export const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
   let timeoutId;
   return (...rest) => {
@@ -59,6 +61,10 @@ export const getAllKeys = (object) =>{
   return keys;
 };
 
+const closePopup = (popup) => {
+  popup.remove();
+};
+
 export const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
   element.textContent = text;
@@ -67,24 +73,24 @@ export const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', p
   }
   parent.append(element);
   setTimeout(() => {
-    element.remove();
+    closePopup(element);
   }, alertTime);
-};
-
-const closePopup = (popupElement) => {
-  popupElement.remove();
 };
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+const onDocumentKeyDown = (evt) => {
+  if (isEscapeKey(evt)) {
+    closePopup(popupElement);
+    document.removeEventListener('keydown', onDocumentKeyDown);
+  }
+};
+
 export const showPopup = (templateId) => {
   const template = findTemplate(templateId);
-  const popupElement = template.cloneNode(true);
+  popupElement = template.cloneNode(true);
   body.append(popupElement);
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      closePopup(popupElement);
-    }});
+  document.addEventListener('keydown', onDocumentKeyDown);
   popupElement.addEventListener('click', () => {
     closePopup(popupElement);
   });

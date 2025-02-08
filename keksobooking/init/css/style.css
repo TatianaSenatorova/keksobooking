@@ -306,6 +306,10 @@ fieldset {
   background-color: #dadada;
 }
 
+.ad-form-header__preview img {
+  object-fit: cover;
+}
+
 .ad-form__field {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -459,8 +463,6 @@ fieldset {
 
   width: 70px;
   height: 45px;
-  margin-right: 2px;
-
   font-size: 0;
 
   border: solid 1px #eee;
@@ -473,7 +475,8 @@ fieldset {
   background-size: 35px 600px;
 
   cursor: pointer;
-}
+  }
+
 
 .features__label:hover {
   -webkit-box-shadow: inset 0 0 0 1px #ffaa99;
@@ -616,19 +619,19 @@ fieldset {
 .ad-form__photo {
   margin-right: 10px;
   margin-bottom: 10px;
- grid-template-rows: 1 / 2;
+ min-width: 70px;
+ min-height: 70px;
 display: flex;
 gap: 3px;
 flex-wrap: wrap;
-align-items: flex-start;
+align-items: center;
   height: 100%;
-  align-content: flex-start;
   background-color: #e4e4de;
   border-radius: 5px;
 }
 
 .ad-form__photo img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .ad-form__element--submit {

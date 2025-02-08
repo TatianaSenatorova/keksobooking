@@ -16,6 +16,8 @@ import { debounce } from './utils.js';
 let appartments = [];
 let filteredAppartments = [];
 
+const model = {};
+
 const debounceRender = debounce(renderMarkers);
 
 const checkCheckboxes = (appartment, checkboxes) => {
@@ -69,9 +71,15 @@ const getFilteredAppartments = () => {
   debounceRender(filteredAppartments);
 };
 
+const getModel = (evt) => {
+  if(evt.target){
+    console.log('123');
+}
+};
+
 const setFilters = (appartmentsData) => {
   appartments = appartmentsData;
-  filtersForm.addEventListener('change', () => getFilteredAppartments());
+  filtersForm.addEventListener('change', (evt) => getModel(evt));
 };
 
 export { setFilters };

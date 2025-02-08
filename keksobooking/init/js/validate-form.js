@@ -4,7 +4,7 @@ import {
   formPrice,
   formAddress,
   roomsSelect,
-  guestsSelect,
+  guestsSelect
 } from './dom-elements.js';
 import {
   MIN_TITLE_LENGTH,
@@ -51,7 +51,7 @@ const getTitleErrorMessage = () =>
 
 const validatePrice = (value) => value >= minPrice &&
 value <= MAX_PRICE;
-const getPriceErrorMessage = () => `Min цена ${minPrice.toLocaleString()}. Max цена ${MAX_PRICE.toLocaleString()} руб.`;
+const getPriceErrorMessage = () => `Min цена ${minPrice}. Max цена ${MAX_PRICE} руб.`;
 
 const validateAddress = (value) => value === `lat: ${address.lat.toFixed(ROUND)}, lng: ${address.lng.toFixed(ROUND)}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';

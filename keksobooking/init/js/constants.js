@@ -48,7 +48,9 @@ export const DEBOUNCE_DELAY = 500;
 export const ERROR_MESSAGE_MAP = 'Не удалось загрузить карту';
 export const ERROR_MESSAGE_DATA = 'Не удалось получить данные';
 
-export const ALERT_SHOW_TIME = 500;
+export const ALERT_SHOW_TIME = 3000;
+
+export const INIT_AVATAR_SRC = 'img/muffin-grey.svg';
 
 export const ErrorElementStyles = {
   position: 'absolute',

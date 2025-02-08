@@ -19,6 +19,7 @@ export const guestsSelectParent = guestsSelect.closest('.ad-form__element-valida
 export const photoChooser = adForm.querySelector('.ad-form__input');
 export const photoPreview = adForm.querySelector('.ad-form__photo');
 export const submitButton = adForm.querySelector('.ad-form__submit');
+export const resetButton = adForm.querySelector('.ad-form__reset');
 
 export const filtersForm = document.querySelector('.map__filters');
 export const filtersFeatures = document.querySelector('.map__features');

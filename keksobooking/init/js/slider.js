@@ -10,7 +10,6 @@ import {
 
 let isMoreThenMaxPrice = false;
 
-
 noUiSlider.create(slider, {
   range: {
     min: sliderInitValues.MIN,
@@ -65,3 +64,5 @@ export const changeSliderOptions = (minPrice) => {
 };
 
 export const resetSlider = () => slider.noUiSlider.reset();
+export const disableSlider = () => slider.noUiSlider.disable();
+export const enableSlider = () => slider.noUiSlider.enable();
