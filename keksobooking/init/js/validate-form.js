@@ -13,20 +13,26 @@ import {
   PostfixGuests,
   PostfixRoomsIn,
   AccomodationOptions,
-  AccomodationSentences
+  AccomodationSentences,
+  ROUND
 } from './constants.js';
-import{ closerMinPrice } from './form-advertisement.js';
-import {
-  closerLat,
-  closerLng
-} from './map.js';
 import {
   getPostfix
 } from './utils.js';
 
-
 let capacityCurrentIndex;
 let allowed = [];
+let address = {};
+let minPrice;
+
+export const getAddress = (coordinates) => {
+  address = structuredClone(coordinates);
+};
+
+export const getMinPrice = (price) => {
+  minPrice = price;
+};
+
 
 const pristine = new Pristine(
   adForm,
@@ -43,11 +49,11 @@ value.length <= MAX_TITLE_LENGTH;
 const getTitleErrorMessage = () =>
   `Mинимальная длина заголовка ${MIN_TITLE_LENGTH} символов, максимальная ${MAX_TITLE_LENGTH}`;
 
-const validatePrice = (value) => value >= closerMinPrice() &&
+const validatePrice = (value) => value >= minPrice &&
 value <= MAX_PRICE;
-const getPriceErrorMessage = () => `Min цена ${closerMinPrice().toLocaleString()}. Max цена ${MAX_PRICE.toLocaleString()} руб.`;
+const getPriceErrorMessage = () => `Min цена ${minPrice.toLocaleString()}. Max цена ${MAX_PRICE.toLocaleString()} руб.`;
 
-const validateAddress = (value) => value === `lat: ${closerLat()}, lng: ${closerLng()}`;
+const validateAddress = (value) => value === `lat: ${address.lat.toFixed(ROUND)}, lng: ${address.lng.toFixed(ROUND)}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';
 
 const validateAccomodation = (value, linkedSelectValue, arrayToCheck, chosenOption, linkedOption) => {

@@ -6,6 +6,7 @@ import {
   formPrice,
   formPriceParent,
   formAddress,
+  formAddressParent,
   formCheckin,
   formCheckout,
   guestsSelect,
@@ -19,7 +20,9 @@ import {
 import {
   FILE_TYPES,
   Accomodation,
-  IdTemplatesPopup
+  IdTemplatesPopup,
+  TokioCoordinates,
+  ROUND
 } from './constants.js';
 import {
   changeSliderOptions,
@@ -28,22 +31,20 @@ import {
 } from './slider.js';
 import {
   isValid,
-  resetValidation
+  resetValidation,
+  getMinPrice
 } from './validate-form.js';
 import { sendData } from './api.js';
 import { showPopup } from './utils.js';
+import { resetMap } from './map.js';
 
 formPrice.placeholder = Accomodation[formType.value].minPrice;
-let currentMinPrice = Accomodation[formType.value].minPrice;
-export const getLatLngMainMarker = (lat, lng) => {
-  formAddress.value = `lat: ${lat}, lng: ${lng}`;
-};
+formAddress.value = `lat: ${TokioCoordinates.LATITUDE.toFixed(ROUND)}, lng: ${TokioCoordinates.LONGITUDE.toFixed(ROUND)}`;
 
-const getMinPrice = () => function (){
-  return currentMinPrice;
+const setInitAddress = () =>{
+  formAddress.value = `lat: ${TokioCoordinates.LATITUDE.toFixed(ROUND)}, lng: ${TokioCoordinates.LONGITUDE.toFixed(ROUND)}`;
 };
-
-export const closerMinPrice = getMinPrice();
+setInitAddress();
 
 const uploadPhoto = (fileInput, parentForPhotos) => {
   const file = fileInput.files[0];
@@ -65,6 +66,11 @@ export const checkIsError = (parent) => {
   }
 };
 
+export const changeAddress = (coordinates) => {
+  checkIsError(formAddressParent);
+  formAddress.value = `lat: ${coordinates.lat.toFixed(ROUND)}, lng: ${coordinates.lng.toFixed(ROUND)}`;
+};
+
 export const checkIsErrorLinkSelect = (target) =>{
   if(target === guestsSelect) {checkIsError(roomsSelectParent);}
   else {checkIsError(guestsSelectParent);}
@@ -74,9 +80,7 @@ const changeMinPrice = (target) => {
   const minPrice = Accomodation[target.value].minPrice;
   formPrice.placeholder = minPrice;
   formPrice.value = minPrice;
-  currentMinPrice = minPrice;
-  getMinPrice();
-  closerMinPrice();
+  getMinPrice(minPrice);
   changeSliderOptions(minPrice);
   updateSlider(minPrice);
   checkIsError(formPriceParent);
@@ -138,6 +142,8 @@ const clearForm = () => {
   resetForm();
   resetSlider();
   removePhotos();
+  resetMap();
+  setInitAddress();
 };
 
 adForm.addEventListener('submit', (evt) => {

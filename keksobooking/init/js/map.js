@@ -9,34 +9,14 @@ import {
   APPARTMENTS_TO_RENDER
 } from './constants.js';
 import { createCard } from './card.js';
-import {
-  getLatLngMainMarker,
-  checkIsError
-} from './form-advertisement.js';
-import { formAddressParent}  from './dom-elements.js';
+import { getAddress } from './validate-form.js';
+
 
 let map;
 let markerGroup;
 let mainMarker;
-let currentLat;
-let currentLng;
 
-const getLat = () => function (){
-  return currentLat;
-};
-export const closerLat = getLat();
-
-const getLng = () => function (){
-  return currentLng;
-};
-export const closerLng = getLng();
-
-const updateMainMarker = (lat, lng) =>{
-  currentLat = lat.toFixed(5);
-  currentLng = lng.toFixed(5);
-};
-
-const getMap = async () => {
+export const getMap = async () => {
   map = await L.map('map-canvas');
 
   L.tileLayer(TILE_LAYER, {
@@ -54,24 +34,24 @@ const getMap = async () => {
     { icon: specialMarker, draggable: true }
   ).addTo(map);
 
-  updateMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
-  getLatLngMainMarker(closerLat(), closerLng());
-
-  mainMarker.on('moveend', () => {
-    updateMainMarker(mainMarker._latlng.lat, mainMarker._latlng.lng);
-    getLatLngMainMarker(closerLat(), closerLng());
-    checkIsError(formAddressParent);
-  });
+  getAddress(mainMarker.getLatLng());
 
   markerGroup = L.layerGroup().addTo(map);
 };
 
+export const getLatLng = (cb) => {
+  mainMarker.on('move', () => {
+    const coordinates = mainMarker.getLatLng();
+    cb(coordinates);
+  }
+  );
+};
 
 const clearMarkerGroup = () => {
   markerGroup.clearLayers();
 };
 
-const renderMarkers = (appartmentsArray) => {
+export const renderMarkers = (appartmentsArray) => {
   clearMarkerGroup();
   appartmentsArray.slice(0, APPARTMENTS_TO_RENDER).map((appartment) => {
     const marker = L.marker(
@@ -82,4 +62,13 @@ const renderMarkers = (appartmentsArray) => {
   });
 };
 
-export { getMap, renderMarkers };
+export const resetMap = () => {
+  mainMarker.setLatLng({
+    lat: TokioCoordinates.LATITUDE,
+    lng: TokioCoordinates.LONGITUDE,
+  });
+  map.setView(
+    [TokioCoordinates.LATITUDE, TokioCoordinates.LONGITUDE],
+    CURRENT_ZOOM
+  );
+};

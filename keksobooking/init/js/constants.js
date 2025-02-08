@@ -11,6 +11,8 @@ export const TokioCoordinates = {
   LONGITUDE: 139.753927
 };
 
+export const ROUND = 5;
+
 export const specialMarker = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],

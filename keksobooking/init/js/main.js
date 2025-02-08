@@ -1,7 +1,8 @@
 import { disablePage } from './disable-page.js';
 import {
   getMap,
-  renderMarkers
+  renderMarkers,
+  getLatLng
 } from './map.js';
 import { getData } from './api.js';
 import { addTagError } from './utils.js';
@@ -9,10 +10,9 @@ import {
   ERROR_MESSAGE_MAP,
   ERROR_MESSAGE_DATA
 } from './constants.js';
-import './map.js';
 import { setFilters} from './form-filters.js';
-import './form-advertisement.js';
-import './validate-form.js';
+import { changeAddress } from './form-advertisement.js';
+import {getAddress} from './validate-form.js';
 import './slider.js';
 
 
@@ -25,6 +25,10 @@ getMap()
         disablePage(false);
         renderMarkers(appartments);
         setFilters(appartments);
+        getLatLng((coordinates) =>
+          (changeAddress(coordinates),
+          getAddress(coordinates)),
+        );
       })
       .catch(() => {
         addTagError(ERROR_MESSAGE_DATA);
