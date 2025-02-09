@@ -1,78 +1,41 @@
 import {
-  filtersForm,
-  typeSelect,
-  priceSelect,
-  roomSelect,
-  guestSelect,
-  featureCheckBoxes
+  filtersForm
 } from './dom-elements.js';
 import {
   PriceRange,
-  DEFAULT_SELECT_VALUE,
-  ModelKeys,
-  KEY_FOR_CHECKBOXES
+  WITHOUT_FILTER,
+  ModelKeys
 } from './constants.js';
 import { renderMarkers } from './map.js';
 import { debounce } from './utils.js';
 
 let appartments = [];
-let filteredAppartments = [];
 const model = {};
 
 const debounceRender = debounce(renderMarkers);
 
-const checkCheckboxes = (appartment, checkboxes) => {
-  const featuresChosen = checkboxes
-    .filter((checkbox) => checkbox.checked)
-    .map((checkbox) => checkbox.value);
-  return featuresChosen.every((feature) =>
-    appartment.offer.features.includes(feature));
-};
-
-
 const FiltersFunctions = {
-  TYPE: (appartment) =>
-    typeSelect.value === appartment.offer.type ||
-    typeSelect.value === DEFAULT_SELECT_VALUE,
+  TYPE: (appartment) => model.type === appartment.offer.type,
   PRICE: (appartment) =>
-    (appartment.offer.price > PriceRange[priceSelect.value].min &&
-      appartment.offer.price < PriceRange[priceSelect.value].max) ||
-    priceSelect.value === DEFAULT_SELECT_VALUE,
+    (appartment.offer.price > PriceRange[model.price].min &&
+      appartment.offer.price < PriceRange[model.price].max),
   ROOMS: (appartment) =>
-    parseInt(roomSelect.value, 10) === appartment.offer.rooms ||
-    roomSelect.value === DEFAULT_SELECT_VALUE,
+    parseInt(model.rooms, 10) === appartment.offer.rooms,
   GUESTS: (appartment) =>
-    parseInt(guestSelect.value, 10) === appartment.offer.rooms ||
-  guestSelect.value === DEFAULT_SELECT_VALUE,
-  FEATURES: (appartment) => {
-    const checkboxes = Array.from(featureCheckBoxes);
-    if(checkboxes.every((checkbox) => !checkbox.checked)) {
-      return true;
-    } else if (checkboxes.some((checkbox) => checkbox.checked) &&
-     !appartment.offer.features) {
-      return false;
-    } return checkCheckboxes(appartment, checkboxes);
-  }
+    parseInt(model.guests, 10) === appartment.offer.rooms,
+  FEATURES: (appartment) => model.features.every((feature) =>
+    appartment.offer.features.includes(feature))
 };
 
-// const getFilteredAppartments = () => {
-//   filteredAppartments = [];
-//   for (let i = 0; i < appartments.length; i++) {
-//     if (
-//       FiltersFunctions.TYPE(appartments[i]) &&
-//       FiltersFunctions.PRICE(appartments[i]) &&
-//       FiltersFunctions.ROOMS(appartments[i]) &&
-//       FiltersFunctions.GUESTS(appartments[i]) &&
-//       FiltersFunctions.FEATURES(appartments[i])
-//     ) {
-//       filteredAppartments.push(appartments[i]);
-//     }
-//   }
-//   console.log(filteredAppartments);
-//   debounceRender(filteredAppartments);
-// };
+const getFilteredAppartments = (filters) =>
+  Object.keys(filters).reduce((filteredApps, filter) => {
+    filteredApps = filteredApps.filter((app) => filters[filter] === WITHOUT_FILTER ||
+    (Array.isArray(filters[filter]) && !filters[filter].length) ||
+    (app.offer[filter] && FiltersFunctions[filter.toUpperCase()](app)));
+    return filteredApps;
+  }, appartments);
 
-const changeModel = ({target}) => {
+const setModel = ({target}) => {
   if (target.tagName === 'SELECT') {
     model[ModelKeys[target.id]] = target.value;
     return model;
@@ -86,13 +49,9 @@ const changeModel = ({target}) => {
   return model;
 };
 
-const getFilteredAppartments = (model) =>{
-console.log(model);
-};
-
 const setFilters = (appartmentsData) => {
   appartments = appartmentsData;
-  filtersForm.addEventListener('change', ({target}) => getFilteredAppartments(changeModel({target})));
+  filtersForm.addEventListener('change', ({target}) => debounceRender(getFilteredAppartments(setModel({target}))));
 };
 
 export { setFilters };

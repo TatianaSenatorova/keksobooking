@@ -84,7 +84,7 @@ export const PriceRange = {
   },
 };
 
-export const DEFAULT_SELECT_VALUE = 'any';
+export const WITHOUT_FILTER = 'any';
 
 export const AllKeysForCard = ['avatar', 'title', 'address', 'price', 'type', 'rooms', 'guests', 'checkin', 'checkout', 'features', 'description', 'photos'];
 
@@ -130,11 +130,11 @@ export const Accomodation = {
 };
 
 export const ModelKeys = {
-  'housing-type': 'TYPE',
-  'housing-price': 'PRICE',
-  'housing-rooms':'ROOMS',
-  'housing-guests': 'GUESTS',
-  'housing-features':'FEATURES',
+  'housing-type': 'type',
+  'housing-price': 'price',
+  'housing-rooms':'rooms',
+  'housing-guests': 'guests',
+  'housing-features':'features',
 };
 
 export const KEY_FOR_CHECKBOXES = 'FEATURES';
