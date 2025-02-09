@@ -129,12 +129,21 @@ export const Accomodation = {
   }
 };
 
+export const ModelKeys = {
+  'housing-type': 'TYPE',
+  'housing-price': 'PRICE',
+  'housing-rooms':'ROOMS',
+  'housing-guests': 'GUESTS',
+  'housing-features':'FEATURES',
+};
+
+export const KEY_FOR_CHECKBOXES = 'FEATURES';
+
 export const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
 
 export const MIN_TITLE_LENGTH = 30;
 export const MAX_TITLE_LENGTH = 100;
 export const MAX_PRICE = 100000;
-export const MIN_PRICE = 10;
 
 export const sliderInitValues = {
   MAX: 100000,

@@ -8,14 +8,15 @@ import {
 } from './dom-elements.js';
 import {
   PriceRange,
-  DEFAULT_SELECT_VALUE
+  DEFAULT_SELECT_VALUE,
+  ModelKeys,
+  KEY_FOR_CHECKBOXES
 } from './constants.js';
 import { renderMarkers } from './map.js';
 import { debounce } from './utils.js';
 
 let appartments = [];
 let filteredAppartments = [];
-
 const model = {};
 
 const debounceRender = debounce(renderMarkers);
@@ -54,32 +55,44 @@ const FiltersFunctions = {
   }
 };
 
-const getFilteredAppartments = () => {
-  filteredAppartments = [];
-  for (let i = 0; i < appartments.length; i++) {
-    if (
-      FiltersFunctions.TYPE(appartments[i]) &&
-      FiltersFunctions.PRICE(appartments[i]) &&
-      FiltersFunctions.ROOMS(appartments[i]) &&
-      FiltersFunctions.GUESTS(appartments[i]) &&
-      FiltersFunctions.FEATURES(appartments[i])
-    ) {
-      filteredAppartments.push(appartments[i]);
-    }
+// const getFilteredAppartments = () => {
+//   filteredAppartments = [];
+//   for (let i = 0; i < appartments.length; i++) {
+//     if (
+//       FiltersFunctions.TYPE(appartments[i]) &&
+//       FiltersFunctions.PRICE(appartments[i]) &&
+//       FiltersFunctions.ROOMS(appartments[i]) &&
+//       FiltersFunctions.GUESTS(appartments[i]) &&
+//       FiltersFunctions.FEATURES(appartments[i])
+//     ) {
+//       filteredAppartments.push(appartments[i]);
+//     }
+//   }
+//   console.log(filteredAppartments);
+//   debounceRender(filteredAppartments);
+// };
+
+const changeModel = ({target}) => {
+  if (target.tagName === 'SELECT') {
+    model[ModelKeys[target.id]] = target.value;
+    return model;
   }
-  console.log(filteredAppartments);
-  debounceRender(filteredAppartments);
+  const key = ModelKeys[target.parentNode.id];
+  if(target.checked) {
+    model[key] =  model[key] ? [...model[key], target.value] : [target.value];
+    return model;
+  }
+  model[key] = model[key].filter((item) => item !== target.value);
+  return model;
 };
 
-const getModel = (evt) => {
-  if(evt.target){
-    console.log('123');
-}
+const getFilteredAppartments = (model) =>{
+console.log(model);
 };
 
 const setFilters = (appartmentsData) => {
   appartments = appartmentsData;
-  filtersForm.addEventListener('change', (evt) => getModel(evt));
+  filtersForm.addEventListener('change', ({target}) => getFilteredAppartments(changeModel({target})));
 };
 
 export { setFilters };
