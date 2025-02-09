@@ -10,7 +10,7 @@ import { renderMarkers } from './map.js';
 import { debounce } from './utils.js';
 
 let appartments = [];
-const model = {};
+let model = {};
 
 const debounceRender = debounce(renderMarkers);
 
@@ -47,6 +47,11 @@ const setModel = ({target}) => {
   }
   model[key] = model[key].filter((item) => item !== target.value);
   return model;
+};
+
+export const resetFilters = () => {
+  filtersForm.reset();
+  debounceRender(appartments);
 };
 
 const setFilters = (appartmentsData) => {

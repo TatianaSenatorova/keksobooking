@@ -34,6 +34,7 @@ import { isValid, resetValidation, getMinPrice } from './validate-form.js';
 import { sendData } from './api.js';
 import { showPopup } from './utils.js';
 import { resetMap } from './map.js';
+import { resetFilters } from './form-filters.js';
 
 formPrice.placeholder = Accomodation[formType.value].minPrice;
 getMinPrice(Accomodation[formType.value].minPrice);
@@ -141,6 +142,7 @@ const onFormSubmit = (evt) => {
     sendData(new FormData(evt.target))
       .then(() => {
         clearForm();
+        resetFilters();
         showPopup(IdTemplatesPopup.SUCCESS);
       })
       .catch(() => showPopup(IdTemplatesPopup.ERROR))
