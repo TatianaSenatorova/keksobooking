@@ -10,7 +10,7 @@ import { renderMarkers } from './map.js';
 import { debounce } from './utils.js';
 
 let appartments = [];
-let model = {};
+const model = {};
 
 const debounceRender = debounce(renderMarkers);
 
@@ -29,9 +29,10 @@ const FiltersFunctions = {
 
 const getFilteredAppartments = (filters) =>
   Object.keys(filters).reduce((filteredApps, filter) => {
-    filteredApps = filteredApps.filter((app) => filters[filter] === WITHOUT_FILTER ||
+    filteredApps = filteredApps.filter((appartment) =>
+      filters[filter] === WITHOUT_FILTER ||
     (Array.isArray(filters[filter]) && !filters[filter].length) ||
-    (app.offer[filter] && FiltersFunctions[filter.toUpperCase()](app)));
+    (appartment.offer[filter] && FiltersFunctions[filter.toUpperCase()](appartment)));
     return filteredApps;
   }, appartments);
 
@@ -43,9 +44,9 @@ const setModel = ({target}) => {
   const key = ModelKeys[target.parentNode.id];
   if(target.checked) {
     model[key] =  model[key] ? [...model[key], target.value] : [target.value];
-    return model;
+  } else {
+    model[key] = model[key].filter((item) => item !== target.value);
   }
-  model[key] = model[key].filter((item) => item !== target.value);
   return model;
 };
 

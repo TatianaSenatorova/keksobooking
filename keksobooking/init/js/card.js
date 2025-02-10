@@ -6,7 +6,8 @@ import {
 } from './constants.js';
 import {
   findTemplate,
-  getAllKeys
+  getAllKeys,
+  makeSpaceInNumber
 } from './utils.js';
 
 const template = findTemplate('card');
@@ -27,7 +28,7 @@ const fillSentence = (tag, dataKeyFirst, dataKeySecond, Sentence) => {
 };
 
 const fillPrice = (tag, dataKey) => {
-  tag.innerHTML = `${ dataKey }<span> ₽/ночь</span>`;
+  tag.innerHTML = `${ makeSpaceInNumber(dataKey) }<span> ₽/ночь</span>`;
 };
 
 const fillDefault = (tag, dataKey, isAccomodation = false) => {

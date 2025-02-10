@@ -25,9 +25,7 @@ getMap()
   .then(() => {
     getData()
       .then((appartments)=>{
-        console.log(appartments);
         disablePage(false);
-        // enableSlider();
         renderMarkers(appartments);
         setFilters(appartments);
         getLatLng((coordinates) =>

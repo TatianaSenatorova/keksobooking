@@ -32,11 +32,15 @@ import { changeSliderOptions,
 } from './slider.js';
 import { isValid, resetValidation, getMinPrice } from './validate-form.js';
 import { sendData } from './api.js';
-import { showPopup } from './utils.js';
+import {
+  showPopup,
+  makeSpaceInNumber
+} from './utils.js';
 import { resetMap } from './map.js';
 import { resetFilters } from './form-filters.js';
 
-formPrice.placeholder = Accomodation[formType.value].minPrice;
+formPrice.placeholder = makeSpaceInNumber(Accomodation[formType.value].minPrice);
+formPrice.type = 'text';
 getMinPrice(Accomodation[formType.value].minPrice);
 formAddress.value = `lat: ${TokioCoordinates.LATITUDE.toFixed(
   ROUND
@@ -89,8 +93,7 @@ export const onAccomodationChange = (target) => {
 
 const onTypeChange = (target) => {
   const minPrice = Accomodation[target.value].minPrice;
-  formPrice.placeholder = minPrice;
-  formPrice.value = minPrice;
+  formPrice.value = makeSpaceInNumber(minPrice);
   getMinPrice(minPrice);
   changeSliderOptions(minPrice);
   updateSlider(minPrice);
@@ -127,8 +130,9 @@ const onPriceInput = () => {
   if (!formPrice.value.length) {
     formPrice.value = 0;
   }
-  updateSlider(parseInt(formPrice.value, 10));
-  // formPrice.removeEventListener('input', onPriceInput);
+  formPrice.value = makeSpaceInNumber(formPrice.value.replaceAll(' ', ''));
+  const valueToSlider = (formPrice.value).replaceAll(' ', '');
+  updateSlider(parseInt(valueToSlider, 10));
 };
 
 const blockSubmitButton = (isBlocked = true) => {
@@ -148,7 +152,6 @@ const onFormSubmit = (evt) => {
       .catch(() => showPopup(IdTemplatesPopup.ERROR))
       .finally(() => blockSubmitButton(false));
   }
-  // adForm.removeEventListener('submit', onFormSubmit);
 };
 
 const onResetClick = () => {

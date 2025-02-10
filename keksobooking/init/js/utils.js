@@ -96,3 +96,11 @@ export const showPopup = (templateId) => {
   });
 };
 
+export const makeSpaceInNumber = (number) => {
+  const changedNumber = [];
+  number = number.toString().split('').reverse();
+  for(let i = 0; i < number.length; i+=3) {
+    changedNumber.push(number.slice(i, i + 3).reverse().join(''));
+  }
+  return changedNumber.reverse().join(' ');
+};

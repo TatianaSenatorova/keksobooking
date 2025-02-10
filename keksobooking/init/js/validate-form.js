@@ -17,7 +17,8 @@ import {
   ROUND
 } from './constants.js';
 import {
-  getPostfix
+  getPostfix,
+  makeSpaceInNumber
 } from './utils.js';
 
 let capacityCurrentIndex;
@@ -51,7 +52,7 @@ const getTitleErrorMessage = () =>
 
 const validatePrice = (value) => value >= minPrice &&
 value <= MAX_PRICE;
-const getPriceErrorMessage = () => `Min цена ${minPrice}. Max цена ${MAX_PRICE} руб.`;
+const getPriceErrorMessage = () => `Min цена ${makeSpaceInNumber(minPrice)}. Max цена ${makeSpaceInNumber(MAX_PRICE)} руб.`;
 
 const validateAddress = (value) => value === `lat: ${address.lat.toFixed(ROUND)}, lng: ${address.lng.toFixed(ROUND)}`;
 const getAddressErrorMessage = () => 'Переместите красную метку на карте на адрес жилья';

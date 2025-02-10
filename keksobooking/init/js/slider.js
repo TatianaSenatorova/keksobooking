@@ -7,6 +7,9 @@ import {
   sliderInitValues,
   Accomodation
 } from './constants.js';
+import {
+  makeSpaceInNumber
+} from './utils.js';
 
 let isMoreThenMaxPrice = false;
 
@@ -20,7 +23,7 @@ noUiSlider.create(slider, {
   connect: sliderInitValues.CONNECT,
   format: {
     to: function (value) {
-      return value.toFixed(0);
+      return makeSpaceInNumber(value.toFixed(0));
     },
     from: function (value) {
       return parseFloat(value);
@@ -54,7 +57,7 @@ export const changeSliderOptions = (minPrice) => {
     connect: sliderInitValues.CONNECT,
     format: {
       to: function (value) {
-        return value.toFixed(0);
+        return makeSpaceInNumber(value.toFixed(0));
       },
       from: function (value) {
         return parseFloat(value);
