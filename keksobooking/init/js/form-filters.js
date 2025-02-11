@@ -17,8 +17,8 @@ const debounceRender = debounce(renderMarkers);
 const FiltersFunctions = {
   TYPE: (appartment) => model.type === appartment.offer.type,
   PRICE: (appartment) =>
-    (appartment.offer.price > PriceRange[model.price].min &&
-      appartment.offer.price < PriceRange[model.price].max),
+    (appartment.offer.price > PriceRange[model.price.toUpperCase()].min &&
+      appartment.offer.price < PriceRange[model.price.toUpperCase()].max),
   ROOMS: (appartment) =>
     parseInt(model.rooms, 10) === appartment.offer.rooms,
   GUESTS: (appartment) =>

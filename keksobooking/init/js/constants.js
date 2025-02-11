@@ -96,19 +96,19 @@ export const ErrorElementStyles = [
 ];
 
 export const PriceRange = {
-  any: {
+  ANY: {
     min: 0,
     max: Infinity,
   },
-  middle: {
+  MIDDLE: {
     min: 10000,
     max: 50000,
   },
-  low: {
+  LOW: {
     min: 0,
     max: 10000,
   },
-  high: {
+  HIGH: {
     min: 50000,
     max: Infinity,
   },
