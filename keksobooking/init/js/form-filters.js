@@ -38,10 +38,10 @@ const getFilteredAppartments = (filters) =>
 
 const setModel = ({target}) => {
   if (target.tagName === 'SELECT') {
-    model[ModelKeys[target.id]] = target.value;
+    model[ModelKeys[target.id.toUpperCase()]] = target.value;
     return model;
   }
-  const key = ModelKeys[target.parentNode.id];
+  const key = ModelKeys[target.parentNode.id.toUpperCase()];
   if(target.checked) {
     model[key] =  model[key] ? [...model[key], target.value] : [target.value];
   } else {

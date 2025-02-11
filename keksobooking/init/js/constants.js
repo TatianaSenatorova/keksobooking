@@ -160,11 +160,11 @@ export const Accomodation = {
 };
 
 export const ModelKeys = {
-  'housing-type': 'type',
-  'housing-price': 'price',
-  'housing-rooms':'rooms',
-  'housing-guests': 'guests',
-  'housing-features':'features',
+  'HOUSING-TYPE': 'type',
+  'HOUSING-PRICE': 'price',
+  'HOUSING-ROOMS':'rooms',
+  'HOUSING-GUESTS': 'guests',
+  'HOUSING-FEATURES':'features',
 };
 
 export const KEY_FOR_CHECKBOXES = 'FEATURES';
