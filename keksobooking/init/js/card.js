@@ -33,7 +33,7 @@ const fillPrice = (tag, dataKey) => {
 
 const fillDefault = (tag, dataKey, isAccomodation = false) => {
   tag.textContent = isAccomodation
-    ? Accomodation[dataKey].lodging
+    ? Accomodation[dataKey.toUpperCase()].lodging
     : dataKey;
 };
 

@@ -50,8 +50,11 @@ value.length <= MAX_TITLE_LENGTH;
 const getTitleErrorMessage = () =>
   `Mинимальная длина заголовка ${MIN_TITLE_LENGTH} символов, максимальная ${MAX_TITLE_LENGTH}`;
 
-const validatePrice = (value) => value >= minPrice &&
-value <= MAX_PRICE;
+const validatePrice = (value) =>{
+  const currentValue = parseInt(value.replaceAll(' ', ''), 10);
+  return currentValue >= minPrice && currentValue <= MAX_PRICE;
+};
+
 const getPriceErrorMessage = () => `Min цена ${makeSpaceInNumber(minPrice)}. Max цена ${makeSpaceInNumber(MAX_PRICE)} руб.`;
 
 const validateAddress = (value) => value === `lat: ${address.lat.toFixed(ROUND)}, lng: ${address.lng.toFixed(ROUND)}`;

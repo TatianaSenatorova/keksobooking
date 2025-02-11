@@ -137,23 +137,23 @@ export const TimeSentence = {
 };
 
 export const Accomodation = {
-  palace: {
+  PALACE: {
     lodging: 'Дворец',
     minPrice: 10000
   },
-  flat:  {
+  FLAT:  {
     lodging: 'Квартира',
     minPrice: 1000
   },
-  hotel: {
+  HOTEL: {
     lodging: 'Отель',
     minPrice: 3000
   },
-  house: {
+  HOUSE: {
     lodging: 'Дом',
     minPrice: 5000
   },
-  bungalow: {
+  BUNGALOW: {
     lodging: 'Бунгало',
     minPrice: 0
   }

@@ -39,9 +39,9 @@ import {
 import { resetMap } from './map.js';
 import { resetFilters } from './form-filters.js';
 
-formPrice.placeholder = makeSpaceInNumber(Accomodation[formType.value].minPrice);
+formPrice.placeholder = makeSpaceInNumber(Accomodation[formType.value.toUpperCase()].minPrice);
 formPrice.type = 'text';
-getMinPrice(Accomodation[formType.value].minPrice);
+getMinPrice(Accomodation[formType.value.toUpperCase()].minPrice);
 formAddress.value = `lat: ${TokioCoordinates.LATITUDE.toFixed(
   ROUND
 )}, lng: ${TokioCoordinates.LONGITUDE.toFixed(ROUND)}`;
@@ -92,7 +92,7 @@ export const onAccomodationChange = (target) => {
 };
 
 const onTypeChange = (target) => {
-  const minPrice = Accomodation[target.value].minPrice;
+  const minPrice = Accomodation[target.value.toUpperCase()].minPrice;
   formPrice.value = makeSpaceInNumber(minPrice);
   getMinPrice(minPrice);
   changeSliderOptions(minPrice);

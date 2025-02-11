@@ -18,7 +18,7 @@ noUiSlider.create(slider, {
     min: sliderInitValues.MIN,
     max: sliderInitValues.MAX,
   },
-  start: Accomodation[formType.value].minPrice,
+  start: Accomodation[formType.value.toUpperCase()].minPrice,
   step: sliderInitValues.STEP,
   connect: sliderInitValues.CONNECT,
   format: {
