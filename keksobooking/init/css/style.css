@@ -631,7 +631,7 @@ align-items: center;
 }
 
 .ad-form__photo img {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .ad-form__element--submit {

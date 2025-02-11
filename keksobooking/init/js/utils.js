@@ -68,9 +68,7 @@ const closePopup = (popup) => {
 export const addTagError = (text, objStyles = ErrorElementStyles, tag = 'div', parent = document.body, alertTime = ALERT_SHOW_TIME) => {
   const element = document.createElement(tag);
   element.textContent = text;
-  for (const key in objStyles) {
-    element.style[key] = objStyles[key];
-  }
+  objStyles.forEach((item) => {element.style[item.STYLE] = item.VALUE;});
   parent.append(element);
   setTimeout(() => {
     closePopup(element);

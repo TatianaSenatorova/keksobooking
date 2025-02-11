@@ -13,13 +13,8 @@ import {
 import { setFilters} from './form-filters.js';
 import { changeAddress } from './form-advertisement.js';
 import {getAddress} from './validate-form.js';
-// import {
-//   disableSlider,
-//   enableSlider
-// } from './slider.js';
 
 disablePage();
-// disableSlider();
 
 getMap()
   .then(() => {

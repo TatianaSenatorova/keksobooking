@@ -52,18 +52,48 @@ export const ALERT_SHOW_TIME = 3000;
 
 export const INIT_AVATAR_SRC = 'img/muffin-grey.svg';
 
-export const ErrorElementStyles = {
-  position: 'absolute',
-  top: '0',
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  padding: '30px',
-  backgroundColor: '#FFA07A',
-  fontSize: '30px',
-  fontWeight: '700',
-  color: 'white',
-};
+export const ErrorElementStyles = [
+  {
+    STYLE: 'position',
+    VALUE: 'absolute'
+  },
+  {
+    STYLE: 'top',
+    VALUE: '0'
+  },
+  {
+    STYLE: 'width',
+    VALUE: '100%'
+  },
+  {
+    STYLE: 'display',
+    VALUE: 'flex'
+  },
+  {
+    STYLE: 'justifyContent',
+    VALUE: 'center'
+  },
+  {
+    STYLE: 'padding',
+    VALUE: '30px'
+  },
+  {
+    STYLE: 'backgroundColor',
+    VALUE: '#FFA07A'
+  },
+  {
+    STYLE: 'fontSize',
+    VALUE: '30px'
+  },
+  {
+    STYLE: 'fontWeight',
+    VALUE: '700'
+  },
+  {
+    STYLE: 'color',
+    VALUE: 'white'
+  },
+];
 
 export const PriceRange = {
   any: {
